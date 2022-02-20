@@ -3,6 +3,7 @@ import fileWorker.FileWorker;
 import model.Person;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 
 public class Main {
@@ -21,19 +22,14 @@ public class Main {
                 Person.HairsColor.BROWN, (long) 10, 56, (float) 101.3, "Moscow");
 
         LinkedListCollection<Person> list = new LinkedListCollection<>();
-        list.add(p3);
-        list.add(p1);
+        Person[] personList =  fileWorker.JSONParse("xui.json", Person[].class);
 
-        list.add(p2);
+        list.addAll(Arrays.asList(personList));
 
-        list.add(p4);
-        list.add(p6);
-
-        list.add(p5);
-
-        fileWorker.toJSON(list,"xui.json");
-//        fileWorker.JSONParse("xui.json");
-
+        Person p7 = new Person("Kakuzu", 25, 40, (long) 500, (float) 90.5, Person.EyesColor.GREEN,
+                Person.HairsColor.WHITE, (long) 10, 56, (float) 101.3, "Konoha");
+        list.add(p7);
+        fileWorker.logger();
     }
 
 
