@@ -1,5 +1,7 @@
 package model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.UUID;
@@ -69,23 +71,30 @@ public class Person {
     }
 
     public enum EyesColor {
+        @SerializedName("green")
         GREEN,
+        @SerializedName("blue")
         BLUE,
+        @SerializedName("orange")
         ORANGE;
 
         @Override
         public String toString() {
-            return super.toString();
+            return super.toString().toLowerCase();
         }
     }
 
     public enum HairsColor {
+        @SerializedName("black")
         BLACK,
+        @SerializedName("white")
         WHITE,
+        @SerializedName("brown")
         BROWN;
+
         @Override
         public String toString() {
-            return super.toString();
+            return super.toString().toLowerCase();
         }
     }
 
@@ -95,6 +104,10 @@ public class Person {
 
     public String getName() {
         return name;
+    }
+
+    public HairsColor getColor(){
+        return this.hairsColor;
     }
 
     public Coordinates getCoordinates() {
@@ -108,10 +121,10 @@ public class Person {
                 "   name: '" + name + '\'' + ";\n" +
                 "   coordinates: " + coordinates.toString() + ";\n" +
                 "   creationDate: " + creationDate.toString() + ";\n" +
-                "   height: " + height.toString() + ";\n" +
+                "   height: " + height + ";\n" +
                 "   weight: " + weight + ";\n" +
-                "   eyeColor: " + eyesColor + ";\n" +
-                "   hairColor: " + hairsColor + ";\n" +
+                "   eyeColor: " + eyesColor.toString() + ";\n" +
+                "   hairColor: " + hairsColor.toString() + ";\n" +
                 "   location: " + location.toString() + ";\n" +
                 '}';
     }
