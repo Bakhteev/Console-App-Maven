@@ -1,10 +1,11 @@
-package validators;
+package Controller.validators;
 
-import model.Person;
+import Model.EyesColor;
+import Model.HairsColor;
 
 public class PersonValidator {
     private void validatePerson(String name, Integer coordinatesX, int coordinatesY, Long height, float weight,
-                                Person.EyesColor eyesColor, Person.HairsColor hairsColor, Long locationX, int locationY,
+                                EyesColor eyesColor, HairsColor hairsColor, Long locationX, int locationY,
                                 Float locationZ,
                                 String locationName) throws IllegalArgumentException {
         if (name == null) throw new IllegalArgumentException("Name can't be empty");

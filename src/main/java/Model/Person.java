@@ -1,12 +1,9 @@
-package model;
-
-import com.google.gson.annotations.SerializedName;
+package Model;
 
 import java.time.LocalDateTime;
-import java.util.Locale;
 import java.util.UUID;
 
-public class Person {
+public class Person implements Comparable<Person> {
     private final Integer id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно
     // быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
@@ -17,6 +14,11 @@ public class Person {
     private final EyesColor eyesColor; //Поле не может быть null
     private HairsColor hairsColor; //Поле не может быть null
     private Location location; //Поле не может быть null
+
+    @Override
+    public int compareTo(Person person) {
+        return name.compareTo(person.getName());
+    }
 
     public Person(String name, Integer coordinatesX, int coordinatesY, Long height, float weight, EyesColor eyesColor,
                   HairsColor hairsColor, Long locationX, int locationY, Float locationZ, String locationName) throws IllegalArgumentException {
@@ -34,68 +36,6 @@ public class Person {
     private int uniqueId() {
         UUID uniqueKey = UUID.randomUUID();
         return Math.abs(uniqueKey.hashCode());
-    }
-
-    public class Coordinates {
-        private Integer x; //Поле не может быть null
-        private int y; //Максимальное значение поля: 988
-
-        public Coordinates(Integer x, int y) {
-            this.x = x;
-            this.y = y;
-        }
-
-        @Override
-        public String toString() {
-            return "{" + " x: " + x + ";" + " y: " + y + "; " + '}';
-        }
-    }
-
-    public class Location {
-        private Long x; //Поле не может быть null
-        private int y;
-        private Float z; //Поле не может быть null
-        private String name; //Поле не может быть null
-
-        public Location(Long x, int y, Float z, String name) {
-            this.x = x;
-            this.y = y;
-            this.z = z;
-            this.name = name;
-        }
-
-        @Override
-        public String toString() {
-            return "{" + " x: " + x + ";" + " y: " + y + ";" + " z: " + z + ";" + " name: '" + name + "'; " + '}';
-        }
-    }
-
-    public enum EyesColor {
-        @SerializedName("green")
-        GREEN,
-        @SerializedName("blue")
-        BLUE,
-        @SerializedName("orange")
-        ORANGE;
-
-        @Override
-        public String toString() {
-            return super.toString().toLowerCase();
-        }
-    }
-
-    public enum HairsColor {
-        @SerializedName("black")
-        BLACK,
-        @SerializedName("white")
-        WHITE,
-        @SerializedName("brown")
-        BROWN;
-
-        @Override
-        public String toString() {
-            return super.toString().toLowerCase();
-        }
     }
 
     public Integer getId() {
@@ -126,6 +66,6 @@ public class Person {
                 "   eyeColor: " + eyesColor.toString() + ";\n" +
                 "   hairColor: " + hairsColor.toString() + ";\n" +
                 "   location: " + location.toString() + ";\n" +
-                '}';
+                "}";
     }
 }

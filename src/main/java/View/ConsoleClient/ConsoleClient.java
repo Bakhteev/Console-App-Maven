@@ -1,4 +1,4 @@
-package consoleInteraction;
+package View.ConsoleClient;
 
 import java.util.ArrayList;
 
