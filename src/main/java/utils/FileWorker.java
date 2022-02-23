@@ -9,7 +9,7 @@ public class FileWorker {
 
     //
     public FileWorker(String property) {
-        dataPath = property + "/../data/";
+        dataPath = property;
     }
 
     public void logger() {
