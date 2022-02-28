@@ -9,6 +9,11 @@ public class PersonValidator {
                                 Float locationZ,
                                 String locationName) throws IllegalArgumentException {
         if (name == null) throw new IllegalArgumentException("Name can't be empty");
+
+
+
+
+
         if (coordinatesX == null) throw new IllegalArgumentException("Coordinate x can't be empty");
         if (coordinatesY > 988) throw new IllegalArgumentException("Max value of coordinate y: 988");
         if (weight <= 0) throw new IllegalArgumentException("Value of weight must be more then 0");

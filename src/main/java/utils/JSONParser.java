@@ -9,7 +9,6 @@ import java.util.Collection;
 
 public class JSONParser {
 
-
     public<T> T JSONParse(String data, Class<T> classOfT) throws IOException {
         Gson gson = Converters.registerLocalDateTime(new GsonBuilder()).create();
         return gson.fromJson(String.valueOf(data), classOfT);

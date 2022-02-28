@@ -1,7 +1,12 @@
+import Controller.collectionManagers.LinkedListCollectionManager;
+import Model.EyesColor;
+import Model.HairsColor;
+import Model.Person;
 import View.ConsoleClient.ConsoleClient;
-import View.ConsoleCommands.AbstractCommand;
-import View.ConsoleCommands.HelpCommand;
+import View.ConsoleCommands.*;
 
+
+import javax.xml.namespace.QName;
 import java.io.IOException;
 import java.util.*;
 
@@ -22,7 +27,7 @@ public class Main {
 //        Person p5 = new Person("Aidan", 10, 20, (long) 100, (float) 95.5, EyesColor.BLUE, HairsColor.BLACK, (long) 10, 56, (float) 101.3, "Moscow");
 //        Person p6 = new Person("Hidan", 10, 20, (long) 100, (float) 95.5, EyesColor.BLUE, HairsColor.BROWN, (long) 10, 56, (float) 101.3, "Moscow");
 //        Person p7 = new Person("Kakuzu", 25, 40, (long) 500, (float) 90.5, EyesColor.GREEN, HairsColor.WHITE, (long) 10, 56, (float) 101.3, "Konoha");
-//
+////
 //        LinkedListCollectionManager collectionManager = new LinkedListCollectionManager();
 //
 //
@@ -47,10 +52,15 @@ public class Main {
 //
 //        fileWorker.saveFile(jsonParser.toJSON(collectionManager.getCollection()), "data/data.json");
 
-        HashMap<String, AbstractCommand> map = new HashMap<>();
-        map.put("help", new HelpCommand());
-        ConsoleClient consoleClient = new ConsoleClient(new AbstractCommand[]{new HelpCommand()});
+
+        ConsoleClient consoleClient = new ConsoleClient(new AbstractCommand[]{new HelpCommand(),
+                new InfoCommand(), new ShowCommands(), new AddCommand(), new UpdateCommand(), new RemoveByIdCommand()});
+
+        consoleClient.help("help");
+
     }
+
+
 }
 
 

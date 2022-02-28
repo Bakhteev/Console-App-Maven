@@ -5,7 +5,7 @@ import View.ConsoleClient.ConsoleClient;
 public class HelpCommand extends AbstractCommand {
 
     public HelpCommand() {
-        super("help", "display help on available commands");
+        super("help", "display help on available commands.", "");
     }
 
     @Override
