@@ -53,4 +53,19 @@ public class PersonValidator {
         if (Integer.parseInt(strY) > MAX_Y)
             throw new IllegalArgumentException("Max value of coordinate y: 988");
     }
+
+    public void validateHeight(String height) {
+        if (height == null)
+            throw new IllegalArgumentException("Height can't be empty");
+        if (Long.parseLong(height) <= MIN_VALUE)
+            throw new IllegalArgumentException("Value of height must be more then 0");
+    }
+
+    public void validateWeight(String strWeight) {
+        if (strWeight.isEmpty())
+            throw new IllegalArgumentException("weight can't be empty");
+        if (Float.parseFloat(strWeight) <= MIN_VALUE)
+            throw new IllegalArgumentException("Value of weight must be more then 0");
+    }
+
 }

@@ -10,8 +10,16 @@ public enum EyesColor {
     @SerializedName("orange")
     ORANGE;
 
+    static public void showColorsList() {
+        for (EyesColor color : values()) {
+            System.out.println(color);
+        }
+    }
+
     @Override
     public String toString() {
         return super.toString().toLowerCase();
     }
+
+
 }
