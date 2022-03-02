@@ -1,7 +1,7 @@
 package View.ConsoleCommands;
 
-public class ShowCommands extends AbstractCommand {
-    public ShowCommands(){
+public class ShowCommand extends AbstractCommand {
+    public ShowCommand(){
         super("show", "print to standard output all elements of the collection in string representation.", "");
     }
 

@@ -1,9 +1,15 @@
 package View.ConsoleCommands;
 
+import Controller.collectionManagers.LinkedListCollectionManager;
+import Model.Person;
+
 public class AddCommand extends AbstractCommand{
 
-    public AddCommand(){
+    LinkedListCollectionManager collectionManager;
+
+    public AddCommand(LinkedListCollectionManager collectionManager){
         super("add", "add a new element to the collection.", "{element}");
+        this.collectionManager = collectionManager;
     }
 
     @Override

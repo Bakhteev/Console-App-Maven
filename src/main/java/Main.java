@@ -28,7 +28,7 @@ public class Main {
 //        Person p6 = new Person("Hidan", 10, 20, (long) 100, (float) 95.5, EyesColor.BLUE, HairsColor.BROWN, (long) 10, 56, (float) 101.3, "Moscow");
 //        Person p7 = new Person("Kakuzu", 25, 40, (long) 500, (float) 90.5, EyesColor.GREEN, HairsColor.WHITE, (long) 10, 56, (float) 101.3, "Konoha");
 ////
-//        LinkedListCollectionManager collectionManager = new LinkedListCollectionManager();
+        LinkedListCollectionManager collectionManager = new LinkedListCollectionManager();
 //
 //
 //        System.out.println(collectionManager.size());
@@ -53,8 +53,26 @@ public class Main {
 //        fileWorker.saveFile(jsonParser.toJSON(collectionManager.getCollection()), "data/data.json");
 
 
-        ConsoleClient consoleClient = new ConsoleClient(new AbstractCommand[]{new HelpCommand(),
-                new InfoCommand(), new ShowCommands(), new AddCommand(), new UpdateCommand(), new RemoveByIdCommand()});
+        ConsoleClient consoleClient = new ConsoleClient(
+                new AbstractCommand[]{
+                        new HelpCommand(),
+                        new InfoCommand(),
+                        new ShowCommand(),
+                        new AddCommand(collectionManager),
+                        new UpdateCommand(),
+                        new RemoveByIdCommand(),
+                        new AddIfMinCommand(),
+                        new SaveCommand(),
+                        new ExitCommand(),
+                        new ExecuteScriptCommand(),
+                        new ClearCommand(),
+                        new RemoveGreaterCommand(),
+                        new PrintDescendingCommand(),
+                        new PrintUniqueLocationCommand(),
+                        new CountByHeightCommand(),
+                        new RemoveFirstCommand(),
+                }
+        );
 
         consoleClient.help("help");
 
