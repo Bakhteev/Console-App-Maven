@@ -10,6 +10,12 @@ public enum HairsColor {
     @SerializedName("brown")
     BROWN;
 
+    static public void showColorsList() {
+        for (HairsColor color : values()) {
+            System.out.println(color);
+        }
+    }
+
     @Override
     public String toString() {
         return super.toString().toLowerCase();

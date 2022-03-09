@@ -1,10 +1,9 @@
 package Controller.PersonAsker;
 
 import Controller.validators.PersonValidator;
-import Model.Coordinates;
-import Model.EyesColor;
-import Model.HairsColor;
+import Model.*;
 
+import java.lang.constant.Constable;
 import java.util.Scanner;
 
 public class PersonAsker {
@@ -17,7 +16,7 @@ public class PersonAsker {
     }
 
 
-    private String askName() {
+    private String askPersonName() {
         String name;
         while (true) {
             try {
@@ -32,7 +31,7 @@ public class PersonAsker {
         return name;
     }
 
-    private Integer askX() {
+    private Integer askCoordinatesX() {
         String strX;
         Integer x;
         while (true) {
@@ -52,7 +51,7 @@ public class PersonAsker {
     }
 
 
-    private int askY() {
+    private int askCoordinatesY() {
         String strY;
         int y;
         while (true) {
@@ -73,8 +72,8 @@ public class PersonAsker {
 
 
     private Coordinates coordinates() {
-        Integer x = askX();
-        int y = askY();
+        Integer x = askCoordinatesX();
+        int y = askCoordinatesY();
         return new Coordinates(x, y);
     }
 
@@ -134,8 +133,114 @@ public class PersonAsker {
         return color;
     }
 
-//    private HairsColor askHairColor(){
-//
-//    }
+    private HairsColor askHairColor() {
+        String strColor;
+        HairsColor color;
+        while (true) {
+            try {
+                System.out.println("Choose hairs' color.");
+                HairsColor.showColorsList();
+                strColor = userScanner.next().trim().toUpperCase();
+                color = HairsColor.valueOf(strColor);
+                break;
+            } catch (IllegalArgumentException e) {
+                System.out.println("Hairs' color wasn't found.");
+            }
+        }
+        return color;
+    }
+
+    private Long askLocationX() {
+        String strX;
+        Long x;
+        while (true) {
+            try {
+                System.out.println("Enter Location X");
+                strX = userScanner.next().trim();
+                validator.validateLocationX(strX);
+                x = Long.parseLong(strX);
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println(e.getMessage());
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return x;
+    }
+
+    private Integer askLocationY() {
+        String strY;
+        int y;
+        while (true) {
+            try {
+                System.out.println("Enter Location Y");
+                strY = userScanner.next().trim();
+                if (strY.isEmpty()) {
+                    return null;
+                }
+                y = Integer.parseInt(strY);
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println(e.getMessage());
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return (int) y;
+    }
+
+    private Float askLocationZ() {
+        String strZ;
+        Float z;
+        while (true) {
+            try {
+                System.out.println("Enter Location Z");
+                strZ = userScanner.next().trim();
+                validator.validateLocationZ(strZ);
+                z = Float.parseFloat(strZ);
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println(e.getMessage());
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return z;
+    }
+
+    private String askLocationName() {
+        String name;
+        while (true) {
+            try {
+                System.out.println("Enter Location's name");
+                name = userScanner.next().trim();
+                validator.validateName(name);
+                break;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return name;
+    }
+
+    private Location location() {
+        Long x = askLocationX();
+        int y = askLocationY();
+        Float z = askLocationZ();
+        String name = askLocationName();
+        return new Location(x, y, z, name);
+    }
+
+    public Person startAsker(){
+        String personName = askPersonName();
+        Coordinates coordinates = this.coordinates();
+        Long height = askHeight();
+        float weight = askWeight();
+        EyesColor eyesColor = askEyesColor();
+        HairsColor hairsColor = askHairColor();
+        Location location = this.location();
+        return new Person(personName, coordinates,height,weight,eyesColor,hairsColor,location);
+    }
 
 }

@@ -5,15 +5,13 @@ import Model.Person;
 
 public class AddCommand extends AbstractCommand{
 
-    LinkedListCollectionManager collectionManager;
-
-    public AddCommand(LinkedListCollectionManager collectionManager){
+    public AddCommand(){
         super("add", "add a new element to the collection.", "{element}");
-        this.collectionManager = collectionManager;
     }
 
     @Override
     public boolean execute(String argument) {
+
         return false;
     }
 }

@@ -20,17 +20,17 @@ public class Person implements Comparable<Person> {
         return name.compareTo(person.getName());
     }
 
-    public Person(String name, Integer coordinatesX, int coordinatesY, Long height, float weight, EyesColor eyesColor,
-                  HairsColor hairsColor, Long locationX, int locationY, Float locationZ, String locationName) throws IllegalArgumentException {
+    public Person(String name, Coordinates coordinates, Long height, float weight, EyesColor eyesColor,
+                  HairsColor hairsColor, Location location) throws IllegalArgumentException {
         this.id = this.uniqueId();
         this.name = name;
-        this.coordinates = new Coordinates(coordinatesX, coordinatesY);
+        this.coordinates = coordinates;
         this.creationDate = LocalDateTime.now();
         this.height = height;
         this.weight = weight;
         this.eyesColor = eyesColor;
         this.hairsColor = hairsColor;
-        this.location = new Location(locationX, locationY, locationZ, locationName);
+        this.location = location;
     }
 
     private int uniqueId() {

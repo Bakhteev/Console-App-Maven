@@ -58,7 +58,7 @@ public class Main {
                         new HelpCommand(),
                         new InfoCommand(),
                         new ShowCommand(),
-                        new AddCommand(collectionManager),
+                        new AddCommand(),
                         new UpdateCommand(),
                         new RemoveByIdCommand(),
                         new AddIfMinCommand(),
