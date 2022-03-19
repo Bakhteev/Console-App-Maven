@@ -1,17 +1,22 @@
 package View.ConsoleCommands;
 
+import Controller.PersonAsker.PersonAsker;
 import Controller.collectionManagers.LinkedListCollectionManager;
 import Model.Person;
 
 public class AddCommand extends AbstractCommand{
+    PersonAsker asker ;
+    LinkedListCollectionManager collectionManager;
 
-    public AddCommand(){
+    public AddCommand(PersonAsker asker, LinkedListCollectionManager collectionManager){
         super("add", "add a new element to the collection.", "{element}");
+        this.collectionManager = collectionManager;
+        this.asker = asker;
     }
 
     @Override
     public boolean execute(String argument) {
-
-        return false;
+        collectionManager.add(asker.startAsker());
+        return true;
     }
 }

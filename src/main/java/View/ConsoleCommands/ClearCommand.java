@@ -1,13 +1,19 @@
 package View.ConsoleCommands;
 
-public class ClearCommand extends AbstractCommand{
+import Controller.collectionManagers.LinkedListCollectionManager;
 
-    public ClearCommand(){
+public class ClearCommand extends AbstractCommand {
+    LinkedListCollectionManager collectionManager;
+
+    public ClearCommand(LinkedListCollectionManager collectionManager) {
         super("clear", "clear collection", "");
+        this.collectionManager = collectionManager;
     }
+
 
     @Override
     public boolean execute(String argument) {
-        return false;
+        collectionManager.clearCollection();
+        return true;
     }
 }

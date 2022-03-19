@@ -18,7 +18,6 @@ public class ConsoleClient {
 
     }
 
-
     static public void printLn(String argument) {
         System.out.println(argument);
     }

@@ -21,8 +21,10 @@ public class PersonAsker {
         while (true) {
             try {
                 System.out.println("Enter person's name");
-                name = userScanner.next().trim();
+                name = userScanner.next();
                 validator.validateName(name);
+                name = name.trim();
+                System.out.println(name);
                 break;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -32,7 +34,7 @@ public class PersonAsker {
     }
 
     private Integer askCoordinatesX() {
-        String strX;
+        String strX = null;
         Integer x;
         while (true) {
             try {
@@ -42,7 +44,7 @@ public class PersonAsker {
                 x = Integer.parseInt(strX);
                 break;
             } catch (NumberFormatException e) {
-                System.out.println(e.getMessage());
+                System.out.println(strX + " not a number");
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
@@ -56,7 +58,7 @@ public class PersonAsker {
         int y;
         while (true) {
             try {
-                System.out.println("Enter X coordinate");
+                System.out.println("Enter Y coordinate");
                 strY = userScanner.next().trim();
                 validator.validateCoordinatesY(strY);
                 y = Integer.parseInt(strY);
@@ -92,7 +94,6 @@ public class PersonAsker {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
-
         }
         return height;
     }
@@ -232,7 +233,7 @@ public class PersonAsker {
         return new Location(x, y, z, name);
     }
 
-    public Person startAsker(){
+    public Person startAsker() {
         String personName = askPersonName();
         Coordinates coordinates = this.coordinates();
         Long height = askHeight();
@@ -240,7 +241,7 @@ public class PersonAsker {
         EyesColor eyesColor = askEyesColor();
         HairsColor hairsColor = askHairColor();
         Location location = this.location();
-        return new Person(personName, coordinates,height,weight,eyesColor,hairsColor,location);
+        return new Person(personName, coordinates, height, weight, eyesColor, hairsColor, location);
     }
 
 }

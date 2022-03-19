@@ -1,9 +1,11 @@
+import Controller.PersonAsker.PersonAsker;
 import Controller.collectionManagers.LinkedListCollectionManager;
 import Model.EyesColor;
 import Model.HairsColor;
 import Model.Person;
 import View.ConsoleClient.ConsoleClient;
 import View.ConsoleCommands.*;
+import utils.JSONParser;
 
 
 import javax.xml.namespace.QName;
@@ -16,8 +18,10 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
 //        FileWorker fileWorker = new FileWorker(System.getProperty("user.dir") + "/../");
-//        JSONParser jsonParser = new JSONParser();
-//
+        String str = "{id: 1831089681,name: Aidan,coordinates: {x: 10,y: 20},creationDate: '2022-02-23T15:26:40.5451444',height: 100,weight: 95.5,eyesColor: blue,hairsColor: black,location: {x: 10,y: 56,z: 101.3,name: Moscow}},";
+
+        JSONParser jsonParser = new JSONParser();
+        System.out.println(jsonParser.stringToJSON());
 ////        fileWorker.logger();
 //
 //        Person p1 = new Person("Tom", 10, 20, (long) 100, (float) 95.5, EyesColor.BLUE, HairsColor.BLACK, (long) 10, 56, (float) 101.3, "Moscow");
@@ -58,14 +62,14 @@ public class Main {
                         new HelpCommand(),
                         new InfoCommand(),
                         new ShowCommand(),
-                        new AddCommand(),
+//                        new AddCommand(),
                         new UpdateCommand(),
                         new RemoveByIdCommand(),
                         new AddIfMinCommand(),
                         new SaveCommand(),
                         new ExitCommand(),
                         new ExecuteScriptCommand(),
-                        new ClearCommand(),
+                        new ClearCommand(collectionManager),
                         new RemoveGreaterCommand(),
                         new PrintDescendingCommand(),
                         new PrintUniqueLocationCommand(),
@@ -74,8 +78,12 @@ public class Main {
                 }
         );
 
-        consoleClient.help("help");
+//        consoleClient.help("help");
 
+        collectionManager.add(new PersonAsker(new Scanner(System.in)).startAsker());
+        for (Person p : collectionManager.getCollection()) {
+            System.out.println(p);
+        }
     }
 
 
