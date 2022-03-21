@@ -30,8 +30,8 @@ public class ConsoleClient {
     }
 
     public boolean executeCommand(String command){
-
-        return commands.get(command).execute(command);
+        String[] userCommand = command.split(" ", 2);
+        return commands.get(userCommand[0]).execute(userCommand.length > 1 ? userCommand[1]: "");
     }
 
     public void printLn(String argument) {

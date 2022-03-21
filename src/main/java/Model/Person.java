@@ -46,9 +46,13 @@ public class Person implements Comparable<Person> {
         return name;
     }
 
-    public HairsColor getColor(){
-        return this.hairsColor;
+    public Long getHeight() {
+        return height;
     }
+
+    public Location getLocation() {return location;}
+
+    public HairsColor getColor() {return this.hairsColor;}
 
     public Coordinates getCoordinates() {
         return coordinates;

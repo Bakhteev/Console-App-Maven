@@ -1,15 +1,20 @@
 package View.ConsoleCommands;
 
-public class CountByHeightCommand extends AbstractCommand {
+import Controller.collectionManagers.LinkedListCollectionManager;
 
-    public CountByHeightCommand() {
-        super("count_by_height", "display the number of elements whose height field value is equal to the " +
-                "given one.", "height");
+public class CountByHeightCommand extends AbstractCommand {
+    LinkedListCollectionManager collectionManager;
+    public CountByHeightCommand(LinkedListCollectionManager collectionManager) {
+        super("count_by_height", "display the number of elements whose height field value is equal to the given one.",
+                "height");
+        this.collectionManager = collectionManager;
     }
 
 
     @Override
     public boolean execute(String argument) {
-        return false;
+        long numberOfHeight = collectionManager.countByHeight(Long.parseLong(argument));
+        System.out.println(numberOfHeight);
+        return true;
     }
 }

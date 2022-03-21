@@ -12,7 +12,7 @@ public class RemoveByIdCommand extends AbstractCommand {
 
     @Override
     public boolean execute(String argument) {
-        collectionManager.removeElementById(Integer.parseInt(argument.split(" ")[0]));
-        return false;
+        collectionManager.removeElementById(Integer.parseInt(argument));
+        return true;
     }
 }

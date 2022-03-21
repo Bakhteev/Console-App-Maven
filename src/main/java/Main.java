@@ -15,14 +15,15 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        LinkedListCollectionManager collectionManager = new LinkedListCollectionManager();
-        collectionManager.add(new Person("Tom", new Coordinates(10, 10), (long) 100, (float) 95.5,
-                EyesColor.BLUE, HairsColor.BLACK, new Location(10L, 10, 100.F, "Moscow")));
-
         FileWorker fileWorker = new FileWorker(System.getProperty("user.dir") + "/../");
         JSONParser jsonParser = new JSONParser();
+        LinkedListCollectionManager collectionManager = jsonParser.JSONParse(fileWorker.readFile("data/data.json"), LinkedListCollectionManager.class);
+        collectionManager.add(new Person("Tom", new Coordinates(10, 10), (long) 100, (float) 95.5,
+                EyesColor.BLUE, HairsColor.BLACK, new Location(10L, 10, 100.F, "Moscow")));
+        collectionManager.add(new Person("Tom", new Coordinates(10, 10), (long) 100, (float) 95.5,
+                EyesColor.BLUE, HairsColor.BLACK, new Location(10L, 10, 100.F, "Moscow")));
 //        System.out.println(jsonParser.stringToJSON(collectionManager));
-        fileWorker.saveFile(jsonParser.toJSON(collectionManager), "data/data.json");
+//        fileWorker.saveFile(jsonParser.toJSON(collectionManager), "data/data.json");
 ////        fileWorker.logger();
 //
 //        Person p1 = new Person("Tom", 10, 20, (long) 100, (float) 95.5, EyesColor.BLUE, HairsColor.BLACK, (long) 10, 56, (float) 101.3, "Moscow");
@@ -77,9 +78,9 @@ public class Main {
                 new ClearCommand(collectionManager),
                 new RemoveGreaterCommand(),
                 new PrintDescendingCommand(),
-                new PrintUniqueLocationCommand(),
-                new CountByHeightCommand(),
-                new RemoveFirstCommand(),
+                new PrintUniqueLocationCommand(collectionManager),
+                new CountByHeightCommand(collectionManager),
+                new RemoveFirstCommand(collectionManager),
         });
 
 //        consoleClient.help("help");
@@ -88,10 +89,16 @@ public class Main {
 //        for (Person p : collectionManager.getCollection()) {
 //            System.out.println(p);
 //        }
-        consoleClient.executeCommand("add");
-        consoleClient.executeCommand("show");
-        consoleClient.executeCommand("remove_by_id " + collectionManager.getCollection().getFirst().getId());
-        consoleClient.executeCommand("show");
+//        consoleClient.executeCommand("add");
+//        consoleClient.executeCommand("show");
+//        System.out.println(collectionManager.size());
+//        consoleClient.executeCommand("remove_by_id" +" "+ collectionManager.getCollection().getFirst().getId());
+//        consoleClient.executeCommand("show");
+//        System.out.println(collectionManager.size());
+//        System.out.println(collectionManager.getCollection().getFirst());
+        consoleClient.executeCommand("print_unique_location");
+//        System.out.println(collectionManager.getCollection().getFirst());
+
     }
 
 
