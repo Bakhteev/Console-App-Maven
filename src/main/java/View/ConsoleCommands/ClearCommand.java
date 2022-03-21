@@ -6,10 +6,9 @@ public class ClearCommand extends AbstractCommand {
     LinkedListCollectionManager collectionManager;
 
     public ClearCommand(LinkedListCollectionManager collectionManager) {
-        super("clear", "clear collection", "");
+        super("clear", "clears collection", "");
         this.collectionManager = collectionManager;
     }
-
 
     @Override
     public boolean execute(String argument) {

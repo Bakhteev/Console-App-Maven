@@ -39,4 +39,11 @@ public class LinkedListCollectionManager {
         collection.clear();
     }
 
+    public void showCollection(){
+        System.out.println(collection);
+    }
+
+    public void removeElementById(int id) {
+        collection.removeIf(element -> element.getId().equals(id));
+    }
 }

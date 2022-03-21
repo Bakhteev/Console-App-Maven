@@ -7,11 +7,9 @@ public interface ICommand {
 
     public String getParameters();
 
-    default public boolean execute(String argument) {
-        return false;
-    }
+    public boolean execute(String argument);
 
-    default public <T> boolean execute(T obj) {
+    default public boolean execute() {
         return false;
     }
 }

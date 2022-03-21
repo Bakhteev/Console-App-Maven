@@ -2,7 +2,6 @@ package View.ConsoleCommands;
 
 import Controller.PersonAsker.PersonAsker;
 import Controller.collectionManagers.LinkedListCollectionManager;
-import Model.Person;
 
 public class AddCommand extends AbstractCommand{
     PersonAsker asker ;

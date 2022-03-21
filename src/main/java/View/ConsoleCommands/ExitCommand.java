@@ -6,8 +6,10 @@ public class ExitCommand extends AbstractCommand{
         super("exit", "exit program without saving collection into file", "");
     }
 
+
+
     @Override
-    public boolean execute(String argument) {
+    public boolean execute(String arguments) {
         return false;
     }
 }

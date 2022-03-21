@@ -1,6 +1,6 @@
 package View.ConsoleCommands;
 
-public abstract class AbstractCommand implements ICommand {
+public abstract class AbstractCommand {
     private String name;
     private String description;
     private String params;
@@ -11,16 +11,16 @@ public abstract class AbstractCommand implements ICommand {
         this.params = params;
     }
 
-    @Override
     public String getName() {
         return name;
     }
 
-    @Override
     public String getDescription() {
         return description;
     }
 
-    @Override
     public String getParameters() {return params;}
+
+    abstract public boolean execute(String arguments);
+
 }
