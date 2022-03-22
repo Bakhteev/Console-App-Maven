@@ -10,7 +10,7 @@ import java.util.Collection;
 
 public class JSONParser {
 
-    public<T> T JSONParse(String data, Class<T> classOfT) throws IOException {
+    public <T> T JSONParse(String data, Class<T> classOfT) throws IOException {
         Gson gson = Converters.registerLocalDateTime(new GsonBuilder()).create();
         return gson.fromJson(String.valueOf(data), classOfT);
     }
@@ -20,7 +20,7 @@ public class JSONParser {
         return gson.toJson(collection);
     }
 
-    public String toJSON(LinkedListCollectionManager manager){
+    public String toJSON(LinkedListCollectionManager manager) {
         Gson gson = Converters.registerLocalDateTime(new GsonBuilder().setPrettyPrinting()).create();
         return gson.toJson(manager);
     }

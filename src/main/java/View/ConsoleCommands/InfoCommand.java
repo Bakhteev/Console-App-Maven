@@ -1,8 +1,8 @@
 package View.ConsoleCommands;
 
-public class InfoCommand extends AbstractCommand{
+public class InfoCommand extends AbstractCommand {
 
-    public InfoCommand(){
+    public InfoCommand() {
         super("info", "print information about the collection to standard output.", "");
     }
 

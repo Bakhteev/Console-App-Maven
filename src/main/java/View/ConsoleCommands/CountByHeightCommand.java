@@ -1,20 +1,29 @@
 package View.ConsoleCommands;
 
 import Controller.collectionManagers.LinkedListCollectionManager;
+import Model.Person;
+
+import java.util.LinkedList;
 
 public class CountByHeightCommand extends AbstractCommand {
-    LinkedListCollectionManager collectionManager;
-    public CountByHeightCommand(LinkedListCollectionManager collectionManager) {
+    LinkedList<Person> collection;
+
+    public CountByHeightCommand(LinkedList<Person> collection) {
         super("count_by_height", "display the number of elements whose height field value is equal to the given one.",
                 "height");
-        this.collectionManager = collectionManager;
     }
 
 
     @Override
     public boolean execute(String argument) {
-        long numberOfHeight = collectionManager.countByHeight(Long.parseLong(argument));
-        System.out.println(numberOfHeight);
+        long height = Long.parseLong(argument);
+        long counter = 0;
+        for (Person element : collection) {
+            if (element.getHeight() == height) {
+                counter++;
+            }
+        }
+        System.out.println(counter);
         return true;
     }
 }

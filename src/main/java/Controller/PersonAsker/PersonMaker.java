@@ -6,12 +6,12 @@ import Model.*;
 import java.lang.constant.Constable;
 import java.util.Scanner;
 
-public class PersonAsker {
+public class PersonMaker {
 
     private final Scanner userScanner;
     private final PersonValidator validator = new PersonValidator();
 
-    public PersonAsker(Scanner userScanner) {
+    public PersonMaker(Scanner userScanner) {
         this.userScanner = userScanner;
     }
 

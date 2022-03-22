@@ -5,21 +5,21 @@ import java.nio.charset.StandardCharsets;
 
 
 public class FileWorker {
-    public String dataPath;
+    public String filePath;
 
     //
-    public FileWorker(String property) {
-        dataPath = property;
+    public FileWorker(String filePath) {
+        this.filePath = filePath;
     }
 
     public void logger() {
-        System.out.println(dataPath);
+        System.out.println(filePath);
     }
 
-    public String readFile(String fileName) {
+    public String readFile() {
 
         StringBuilder jsonString = new StringBuilder();
-        File file = new File(dataPath + fileName);
+        File file = new File(filePath);
         try (Reader reader = new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8);
         ) {
             int c;
@@ -32,9 +32,10 @@ public class FileWorker {
         return String.valueOf(jsonString);
     }
 
-    public void saveFile(String data, String fileName) throws IOException {
+    public void saveFile(String data) throws IOException {
 //       OutputStreamWriter writer = new FileWriter(dataPath + fileName);
-        OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(dataPath + fileName), StandardCharsets.UTF_8);
+        OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(filePath),
+                StandardCharsets.UTF_8);
         writer.write(data);
         writer.flush();
         writer.close();

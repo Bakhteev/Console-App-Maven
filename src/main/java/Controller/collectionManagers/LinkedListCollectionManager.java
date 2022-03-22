@@ -41,22 +41,8 @@ public class LinkedListCollectionManager {
         collection.clear();
     }
 
-    public void showCollection() {
-        System.out.println(collection);
-    }
-
-    public void removeElementById(int id) {
+    public void deleteById(int id) {
         collection.removeIf(element -> element.getId().equals(id));
-    }
-
-    public long countByHeight(long height) {
-        long counter = 0;
-        for (Person element : collection) {
-            if (element.getHeight() == height) {
-                counter++;
-            }
-        }
-        return counter;
     }
 
     public void removeFirstElement() {

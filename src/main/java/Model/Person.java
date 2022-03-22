@@ -52,6 +52,8 @@ public class Person implements Comparable<Person> {
 
     public Location getLocation() {return location;}
 
+    public Float getWeight() {return weight;}
+
     public HairsColor getColor() {return this.hairsColor;}
 
     public Coordinates getCoordinates() {

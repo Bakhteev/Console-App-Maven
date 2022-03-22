@@ -2,7 +2,7 @@ package View.ConsoleCommands;
 
 import Controller.collectionManagers.LinkedListCollectionManager;
 
-public class PrintUniqueLocationCommand extends AbstractCommand{
+public class PrintUniqueLocationCommand extends AbstractCommand {
 
     LinkedListCollectionManager collectionManager;
 

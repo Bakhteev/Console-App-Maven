@@ -19,7 +19,9 @@ public abstract class AbstractCommand {
         return description;
     }
 
-    public String getParameters() {return params;}
+    public String getParameters() {
+        return params;
+    }
 
     abstract public boolean execute(String arguments);
 

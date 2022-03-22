@@ -19,7 +19,7 @@ public class ConsoleClient {
 //
 //    }
 
-    public void addCommands(AbstractCommand[] commands){
+    public void addCommands(AbstractCommand[] commands) {
         for (AbstractCommand command : commands) {
             this.commands.put(command.getName(), command);
         }
@@ -29,9 +29,9 @@ public class ConsoleClient {
         return commands;
     }
 
-    public boolean executeCommand(String command){
+    public boolean executeCommand(String command) {
         String[] userCommand = command.split(" ", 2);
-        return commands.get(userCommand[0]).execute(userCommand.length > 1 ? userCommand[1]: "");
+        return commands.get(userCommand[0]).execute(userCommand.length > 1 ? userCommand[1] : "");
     }
 
     public void printLn(String argument) {
