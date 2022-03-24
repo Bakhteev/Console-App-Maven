@@ -1,13 +1,20 @@
 package View.ConsoleCommands;
 
-public class InfoCommand extends AbstractCommand {
+import Controller.collectionManagers.LinkedListCollectionManager;
 
-    public InfoCommand() {
+public class InfoCommand extends AbstractCommand {
+    LinkedListCollectionManager collectionManager ;
+    public InfoCommand(LinkedListCollectionManager collectionManager) {
         super("info", "print information about the collection to standard output.", "");
+        this.collectionManager = collectionManager;
     }
 
     @Override
     public boolean execute(String argument) {
-        return false;
+        System.out.println("Collection initialization time: " + collectionManager.getInitializationTime() + "\n"
+                + "Collection last save time: " + collectionManager.getLastSaveTime() + "\n"
+                + "Collection type: " + collectionManager.getFirstElement().getClass().getSimpleName() + "\n"
+                + "Collection size: " + collectionManager.size() + "\n");
+        return true;
     }
 }

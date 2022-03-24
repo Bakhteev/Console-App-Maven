@@ -3,22 +3,54 @@ package Controller.collectionManagers;
 import comparators.PersonNameComparator;
 import Model.Person;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 
 public class LinkedListCollectionManager {
     private final LinkedList<Person> collection = new LinkedList<>();
+    private LocalDateTime initializationTime = LocalDateTime.now();
+    private LocalDateTime lastSaveTime;
 
     public void add(Person person) {
-        if (checkUniqueId(person)) {
-            throw new SecurityException("Person id must be unique");
+        try {
+            if (checkUniqueId(person)) {
+                throw new SecurityException("Person id must be unique");
+            }
+            this.collection.add(person);
+            this.collection.sort(new PersonNameComparator());
+        } catch (SecurityException e) {
+            System.out.println(e.getMessage());
         }
-        this.collection.add(person);
-        this.collection.sort(new PersonNameComparator());
     }
 
     public void addAll(Collection<Person> collection) {
-        this.collection.addAll(collection);
+        if (size() == 0){
+            this.collection.addAll(collection);
+            Set<Integer> setOfId = new HashSet<>();
+            for (Iterator<Person> iterator = collection.iterator(); iterator.hasNext(); ){
+                Person p = iterator.next();
+                setOfId.add(p.getId());
+            }
+
+        }else {
+            for (Iterator<Person> iterator = collection.iterator(); iterator.hasNext(); ) {
+                try {
+                    Person p = iterator.next();
+                    if (checkUniqueId(p)) {
+                        throw new SecurityException("Person id must be unique, this object will not be added to collection.\n" + p.toString());
+                    }
+                } catch (SecurityException e) {
+                    System.out.println(e.getMessage());
+                    iterator.remove();
+                }
+            }
+        }
+    }
+
+    public void loadCollection(Collection<Person> collection){
+        addAll(collection);
+        initializationTime = LocalDateTime.now();
     }
 
     public int size() {
@@ -29,6 +61,18 @@ public class LinkedListCollectionManager {
         return collection;
     }
 
+    public LocalDateTime getInitializationTime() {
+        return initializationTime;
+    }
+
+    public LocalDateTime getLastSaveTime() {
+        return lastSaveTime;
+    }
+
+    public void setLastSaveTime(){
+        lastSaveTime = LocalDateTime.now();
+    }
+
     private boolean checkUniqueId(Person person) {
         for (Person item : collection) {
             if (item.getId().equals(person.getId()))
@@ -37,12 +81,20 @@ public class LinkedListCollectionManager {
         return false;
     }
 
+//    private Collection<Person> checkUniqueId(){
+//
+//    }
+
     public void clearCollection() {
         collection.clear();
     }
 
     public void deleteById(int id) {
         collection.removeIf(element -> element.getId().equals(id));
+    }
+
+    public Person getFirstElement() {
+        return collection.getFirst();
     }
 
     public void removeFirstElement() {
@@ -65,4 +117,6 @@ public class LinkedListCollectionManager {
 //        }
         return location;
     }
+
+
 }

@@ -13,20 +13,20 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        System.out.println(args[0]);
         FileWorker fileWorker = new FileWorker(System.getProperty("user.dir") + "/../" + args[0]);
         JSONParser jsonParser = new JSONParser();
-        LinkedListCollectionManager collectionManager = jsonParser.JSONParse(fileWorker.readFile(),
-                LinkedListCollectionManager.class) == null ? new LinkedListCollectionManager() : jsonParser.JSONParse(fileWorker.readFile(), LinkedListCollectionManager.class);
-        collectionManager.add(new Person("Tom", new Coordinates(10, 10), (long) 10000000, (float) 95.5,
-                EyesColor.BLUE, HairsColor.BLACK, new Location(10L, 10, 100.F, "Moscow")));
-        collectionManager.add(new Person("Tom", new Coordinates(10, 10), (long) 100, (float) 95.5,
-                EyesColor.BLUE, HairsColor.BLACK, new Location(10L, 10, 100.F, "Moscow")));
+
+        Person p1 = new Person("XUI", new Coordinates(10, 10), (long) 10000000, (float) 95.5, EyesColor.BLUE, HairsColor.BLACK, new Location(10L
+                , 10, 100.F, "Moscow"));
+        LinkedListCollectionManager collectionManager = new LinkedListCollectionManager();
+        collectionManager.loadCollection(       jsonParser.JSONParse(fileWorker.readFile(), LinkedList.class));
+
+
 
         ConsoleClient consoleClient = new ConsoleClient();
         consoleClient.addCommands(new AbstractCommand[]{
                 new HelpCommand(consoleClient),
-                new InfoCommand(),
+                new InfoCommand(collectionManager),
                 new ShowCommand(collectionManager.getCollection()),
                 new AddCommand(new PersonMaker(new Scanner(System.in)), collectionManager),
                 new UpdateCommand(),
@@ -56,7 +56,8 @@ public class Main {
 //        consoleClient.executeCommand("show");
 //        System.out.println(collectionManager.size());
 //        System.out.println(collectionManager.getCollection().getFirst());
-        consoleClient.executeCommand("show");
+        consoleClient.executeCommand("info");
+//        consoleClient.executeCommand("show");
         consoleClient.executeCommand("save");
 
 //        System.out.println(collectionManager.getCollection().getFirst());
