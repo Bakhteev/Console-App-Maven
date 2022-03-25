@@ -13,7 +13,7 @@ public class InfoCommand extends AbstractCommand {
     public boolean execute(String argument) {
         System.out.println("Collection initialization time: " + collectionManager.getInitializationTime() + "\n"
                 + "Collection last save time: " + collectionManager.getLastSaveTime() + "\n"
-                + "Collection type: " + collectionManager.getFirstElement().getClass().getSimpleName() + "\n"
+                + "Collection type: " + collectionManager.getType() + "\n"
                 + "Collection size: " + collectionManager.size() + "\n");
         return true;
     }

@@ -19,9 +19,8 @@ public class Main {
         Person p1 = new Person("XUI", new Coordinates(10, 10), (long) 10000000, (float) 95.5, EyesColor.BLUE, HairsColor.BLACK, new Location(10L
                 , 10, 100.F, "Moscow"));
         LinkedListCollectionManager collectionManager = new LinkedListCollectionManager();
-        collectionManager.loadCollection(       jsonParser.JSONParse(fileWorker.readFile(), LinkedList.class));
-
-
+        collectionManager.loadCollection((jsonParser.JSONParse(fileWorker.readFile(), Person[].class)));
+//        collectionManager.add(p1);
 
         ConsoleClient consoleClient = new ConsoleClient();
         consoleClient.addCommands(new AbstractCommand[]{
@@ -38,7 +37,7 @@ public class Main {
                 new ClearCommand(collectionManager),
                 new RemoveGreaterCommand(),
                 new PrintDescendingCommand(),
-                new PrintUniqueLocationCommand(collectionManager),
+                new PrintUniqueLocationCommand(collectionManager.getCollection()),
                 new CountByHeightCommand(collectionManager.getCollection()),
                 new RemoveFirstCommand(collectionManager),
         });
@@ -56,9 +55,9 @@ public class Main {
 //        consoleClient.executeCommand("show");
 //        System.out.println(collectionManager.size());
 //        System.out.println(collectionManager.getCollection().getFirst());
-        consoleClient.executeCommand("info");
 //        consoleClient.executeCommand("show");
-        consoleClient.executeCommand("save");
+//        consoleClient.executeCommand("save");
+        consoleClient.executeCommand("print_unique_location");
 
 //        System.out.println(collectionManager.getCollection().getFirst());
 

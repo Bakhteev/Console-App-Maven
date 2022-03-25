@@ -9,8 +9,9 @@ import java.util.*;
 
 public class LinkedListCollectionManager {
     private final LinkedList<Person> collection = new LinkedList<>();
-    private LocalDateTime initializationTime = LocalDateTime.now();
+    private LocalDateTime initializationTime;
     private LocalDateTime lastSaveTime;
+    private final String type = this.collection.getClass().getSimpleName() + " of " + Person.class.getSimpleName();
 
     public void add(Person person) {
         try {
@@ -25,15 +26,28 @@ public class LinkedListCollectionManager {
     }
 
     public void addAll(Collection<Person> collection) {
-        if (size() == 0){
+        if (size() == 0) {
             this.collection.addAll(collection);
             Set<Integer> setOfId = new HashSet<>();
-            for (Iterator<Person> iterator = collection.iterator(); iterator.hasNext(); ){
-                Person p = iterator.next();
-                setOfId.add(p.getId());
+            for (Person element : this.collection) {
+                setOfId.add(element.getId());
             }
-
-        }else {
+            for (Integer id : setOfId) {
+                try {
+                    int counter = 0;
+                    for (Person element : this.collection) {
+                        if (id.equals(element.getId())) counter++;
+                    }
+                    if (counter > 1) {
+                        throw new SecurityException("Person id must be unique, objects with this id - " + id + " will be removed.\nNumber of " +
+                                "objects: " + counter);
+                    }
+                } catch (SecurityException e) {
+                    deleteById(id);
+                    System.out.println(e.getMessage());
+                }
+            }
+        } else {
             for (Iterator<Person> iterator = collection.iterator(); iterator.hasNext(); ) {
                 try {
                     Person p = iterator.next();
@@ -48,8 +62,8 @@ public class LinkedListCollectionManager {
         }
     }
 
-    public void loadCollection(Collection<Person> collection){
-        addAll(collection);
+    public void loadCollection(Person[] collection) {
+        addAll(List.of(collection));
         initializationTime = LocalDateTime.now();
     }
 
@@ -69,8 +83,22 @@ public class LinkedListCollectionManager {
         return lastSaveTime;
     }
 
-    public void setLastSaveTime(){
+    public Person getElementById(Integer id) {
+        Person person = null;
+        for (Person element : collection) {
+            if (element.getId().equals(id)) {
+                person = element;
+            }
+        }
+        return person;
+    }
+
+    public void setLastSaveTime() {
         lastSaveTime = LocalDateTime.now();
+    }
+
+    public String getType() {
+        return type;
     }
 
     private boolean checkUniqueId(Person person) {
@@ -80,10 +108,6 @@ public class LinkedListCollectionManager {
         }
         return false;
     }
-
-//    private Collection<Person> checkUniqueId(){
-//
-//    }
 
     public void clearCollection() {
         collection.clear();
@@ -100,23 +124,5 @@ public class LinkedListCollectionManager {
     public void removeFirstElement() {
         collection.remove();
     }
-
-    public String searchUniqueLocationName() {
-        long counter = 0;
-        String location = collection.get(0).getLocation().getName();
-//        for (int i = 1; i < collection.size(); i++) {
-//            for (int j = 1; j < collection.size(); j++) {
-//                if (location.equals(collection.get(j).getLocation().getName())) {
-//                    counter++;
-//                    System.out.println(location + " " + counter);
-//                }
-//            }
-//            if (counter == 0)
-//                break;
-//            counter = 0;
-//        }
-        return location;
-    }
-
 
 }

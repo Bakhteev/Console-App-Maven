@@ -24,7 +24,7 @@ public class SaveCommand extends AbstractCommand {
     public boolean execute(String argument) {
         try {
             collectionManager.setLastSaveTime();
-            fileWorker.saveFile(jsonParser.toJSON(collectionManager));
+            fileWorker.saveFile(jsonParser.toJSON(collectionManager.getCollection()));
         } catch (IOException e) {
             System.out.println(e.getMessage());
             return false;
