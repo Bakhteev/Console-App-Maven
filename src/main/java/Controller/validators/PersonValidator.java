@@ -1,7 +1,6 @@
 package Controller.validators;
 
 public class PersonValidator {
-    private final int MAX_Y = 988;
     private final int MIN_VALUE = 0;
 
     public void validateName(String name) {
@@ -15,6 +14,8 @@ public class PersonValidator {
     }
 
     public void validateCoordinatesY(String strY) {
+        int MAX_Y = 988;
+
         if (strY.isEmpty())
             throw new IllegalArgumentException("Coordinate " +
                     "y " +

@@ -1,13 +1,10 @@
 package View.ConsoleCommands;
 
 import Controller.collectionManagers.LinkedListCollectionManager;
-import Model.Person;
 import utils.FileWorker;
 import utils.JSONParser;
 
 import java.io.IOException;
-import java.util.LinkedList;
-
 public class SaveCommand extends AbstractCommand {
     FileWorker fileWorker;
     JSONParser jsonParser;

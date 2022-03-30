@@ -1,8 +1,6 @@
 package Controller.collectionManagers;
-
 import comparators.PersonNameComparator;
 import Model.Person;
-
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -115,6 +113,11 @@ public class LinkedListCollectionManager {
 
     public void deleteById(int id) {
         collection.removeIf(element -> element.getId().equals(id));
+    }
+
+    public void deleteObject(Person person){
+        collection.remove(person);
+        collection.sort(new PersonNameComparator());
     }
 
     public Person getFirstElement() {

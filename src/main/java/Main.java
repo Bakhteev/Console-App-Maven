@@ -1,4 +1,4 @@
-import Controller.PersonAsker.PersonMaker;
+import Controller.PersonMaker.PersonMaker;
 import Controller.collectionManagers.LinkedListCollectionManager;
 import Model.*;
 import View.ConsoleClient.ConsoleClient;
@@ -35,7 +35,7 @@ public class Main {
                 new ExitCommand(),
                 new ExecuteScriptCommand(),
                 new ClearCommand(collectionManager),
-                new RemoveGreaterCommand(),
+                new RemoveGreaterCommand(new PersonMaker(new Scanner(System.in)), collectionManager),
                 new PrintDescendingCommand(),
                 new PrintUniqueLocationCommand(collectionManager.getCollection()),
                 new CountByHeightCommand(collectionManager.getCollection()),
@@ -55,9 +55,10 @@ public class Main {
 //        consoleClient.executeCommand("show");
 //        System.out.println(collectionManager.size());
 //        System.out.println(collectionManager.getCollection().getFirst());
-//        consoleClient.executeCommand("show");
+        consoleClient.executeCommand("show");
 //        consoleClient.executeCommand("save");
-        consoleClient.executeCommand("print_unique_location");
+        consoleClient.executeCommand("remove_greater");
+        consoleClient.executeCommand("show");
 
 //        System.out.println(collectionManager.getCollection().getFirst());
 

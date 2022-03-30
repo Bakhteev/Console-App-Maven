@@ -1,10 +1,8 @@
 package View.ConsoleCommands;
 
-import Exeptions.NoUniqueLocationException;
 import Model.Person;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 
@@ -19,6 +17,20 @@ public class PrintUniqueLocationCommand extends AbstractCommand {
 
     @Override
     public boolean execute(String argument) {
+        HashMap<String, Integer> map =countLocations();
+        String locationNameToShow = "";
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            if (entry.getValue() == 1) {
+                locationNameToShow = entry.getKey();
+                System.out.println("Unique location is " + entry.getKey());
+            }
+        }
+        if (locationNameToShow.isEmpty())
+            System.out.println("No unique Location");
+        return true;
+    }
+
+    private HashMap<String, Integer> countLocations() {
         HashMap<String, Integer> map = new HashMap<>();
         for (Person element : collection) {
             String locationName = element.getLocation().getName();
@@ -27,14 +39,6 @@ public class PrintUniqueLocationCommand extends AbstractCommand {
             else
                 map.put(locationName, 1);
         }
-
-        for (Map.Entry<String, Integer> entry : map.entrySet()) {
-            String locationNameToShow = "";
-            if (entry.getValue() == 1) {
-                locationNameToShow = entry.getKey();
-            }
-            System.out.println(locationNameToShow.isEmpty() ? "No unique Location" : "Unique location is: " +  entry.getKey());
-        }
-        return true;
+        return map;
     }
 }

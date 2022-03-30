@@ -1,6 +1,4 @@
 package View.ConsoleCommands;
-
-import Controller.collectionManagers.LinkedListCollectionManager;
 import Model.Person;
 
 import java.util.LinkedList;

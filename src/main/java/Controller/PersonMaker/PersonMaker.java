@@ -1,9 +1,7 @@
-package Controller.PersonAsker;
+package Controller.PersonMaker;
 
 import Controller.validators.PersonValidator;
 import Model.*;
-
-import java.lang.constant.Constable;
 import java.util.Scanner;
 
 public class PersonMaker {
@@ -233,7 +231,7 @@ public class PersonMaker {
         return new Location(x, y, z, name);
     }
 
-    public Person startAsker() {
+    public Person startMaker() {
         String personName = askPersonName();
         Coordinates coordinates = this.coordinates();
         Long height = askHeight();

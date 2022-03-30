@@ -7,13 +7,8 @@ import java.nio.charset.StandardCharsets;
 public class FileWorker {
     public String filePath;
 
-    //
     public FileWorker(String filePath) {
         this.filePath = filePath;
-    }
-
-    public void logger() {
-        System.out.println(filePath);
     }
 
     public String readFile() {
@@ -33,7 +28,6 @@ public class FileWorker {
     }
 
     public void saveFile(String data) throws IOException {
-//       OutputStreamWriter writer = new FileWriter(dataPath + fileName);
         OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(filePath),
                 StandardCharsets.UTF_8);
         writer.write(data);

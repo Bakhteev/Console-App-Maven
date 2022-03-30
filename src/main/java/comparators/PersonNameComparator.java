@@ -1,7 +1,5 @@
 package comparators;
-
 import Model.Person;
-
 import java.util.Comparator;
 
 public class PersonNameComparator implements Comparator<Person> {

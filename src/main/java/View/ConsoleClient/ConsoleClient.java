@@ -1,10 +1,7 @@
 package View.ConsoleClient;
 
-import Controller.collectionManagers.LinkedListCollectionManager;
 import View.ConsoleCommands.AbstractCommand;
-import View.ConsoleCommands.AddCommand;
 
-import java.util.Collection;
 import java.util.LinkedHashMap;
 
 public class ConsoleClient {

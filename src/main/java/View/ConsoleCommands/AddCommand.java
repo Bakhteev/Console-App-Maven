@@ -1,6 +1,6 @@
 package View.ConsoleCommands;
 
-import Controller.PersonAsker.PersonMaker;
+import Controller.PersonMaker.PersonMaker;
 import Controller.collectionManagers.LinkedListCollectionManager;
 
 public class AddCommand extends AbstractCommand {
@@ -15,7 +15,7 @@ public class AddCommand extends AbstractCommand {
 
     @Override
     public boolean execute(String argument) {
-        collectionManager.add(maker.startAsker());
+        collectionManager.add(maker.startMaker());
         return true;
     }
 }
