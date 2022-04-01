@@ -4,6 +4,8 @@ import Controller.PersonMaker.PersonMaker;
 import Controller.collectionManagers.LinkedListCollectionManager;
 import Model.*;
 
+import java.util.ArrayList;
+
 public class RemoveGreaterCommand extends AbstractCommand {
     private PersonMaker maker;
     private LinkedListCollectionManager collectionManager;
@@ -18,17 +20,14 @@ public class RemoveGreaterCommand extends AbstractCommand {
 
     @Override
     public boolean execute(String argument) {
-        Person personToCompare = new Person("XUI", new Coordinates(10, 10), (long) 175, (float) 80, EyesColor.BLUE, HairsColor.BLACK,
-                new Location(10L
-                , 10, 100.F, "Moscow"));
-//        Person personToCompare = maker.startMaker();
-        for (Person person : collectionManager.getCollection()) {
-            System.out.println(person.getHeight() > personToCompare.getHeight() && person.getWeight() > personToCompare.getWeight());
-            if (person.getHeight().compareTo(personToCompare.getHeight()) + person.getWeight().compareTo(personToCompare.getWeight()) > 0 ) {
-                System.out.println(person);
-                collectionManager.deleteObject(person);
-            }
-        }
+        Person personToCompare = maker.startMaker();
+        ArrayList<Person> listToRemove = new ArrayList<>();
+
+        collectionManager.getCollection().stream()
+                .filter((Person person) -> person.getWeight() > personToCompare.getWeight() && person.getHeight() > personToCompare.getHeight())
+                .forEach(listToRemove::add);
+
+        listToRemove.forEach(collectionManager::deleteObject);
         return true;
     }
 }

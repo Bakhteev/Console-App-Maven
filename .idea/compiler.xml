@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="lab5_maven" target="17" />
+      <module name="lab5_maven" target="8.0" />
     </bytecodeTargetLevel>
   </component>
 </project>

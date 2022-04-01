@@ -6,6 +6,7 @@ import View.ConsoleCommands.*;
 import utils.FileWorker;
 import utils.JSONParser;
 
+import java.io.Console;
 import java.io.IOException;
 import java.util.*;
 
@@ -30,13 +31,13 @@ public class Main {
                 new AddCommand(new PersonMaker(new Scanner(System.in)), collectionManager),
                 new UpdateCommand(),
                 new RemoveByIdCommand(collectionManager),
-                new AddIfMinCommand(),
+                new AddIfMinCommand(collectionManager, new PersonMaker(new Scanner(System.in))),
                 new SaveCommand(fileWorker, jsonParser, collectionManager),
                 new ExitCommand(),
                 new ExecuteScriptCommand(),
                 new ClearCommand(collectionManager),
                 new RemoveGreaterCommand(new PersonMaker(new Scanner(System.in)), collectionManager),
-                new PrintDescendingCommand(),
+                new PrintDescendingCommand(collectionManager.getCollection()),
                 new PrintUniqueLocationCommand(collectionManager.getCollection()),
                 new CountByHeightCommand(collectionManager.getCollection()),
                 new RemoveFirstCommand(collectionManager),
@@ -55,12 +56,21 @@ public class Main {
 //        consoleClient.executeCommand("show");
 //        System.out.println(collectionManager.size());
 //        System.out.println(collectionManager.getCollection().getFirst());
-        consoleClient.executeCommand("show");
 //        consoleClient.executeCommand("save");
-        consoleClient.executeCommand("remove_greater");
-        consoleClient.executeCommand("show");
+//        consoleClient.executeCommand("show");
+//        consoleClient.executeCommand("remove_greater");
+//        consoleClient.executeCommand("show");
+//        consoleClient.executeCommand("print_descending");
+//        consoleClient.executeCommand("show");
 
 //        System.out.println(collectionManager.getCollection().getFirst());
+        while (true) {
+            Console console = System.console();
+            if (console != null) {
+                System.out.println("Hello u pidor");
+                consoleClient.executeCommand(console.readLine("type the command"));
+            }
+        }
 
     }
 
