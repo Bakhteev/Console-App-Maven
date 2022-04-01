@@ -8,14 +8,6 @@ public class ConsoleClient {
 
     LinkedHashMap<String, AbstractCommand> commands = new LinkedHashMap<>();
 
-
-//    public ConsoleClient(AbstractCommand[] commands) {
-//        for (AbstractCommand command : commands) {
-//            this.commands.put(command.getName(), command);
-//        }
-//
-//    }
-
     public void addCommands(AbstractCommand[] commands) {
         for (AbstractCommand command : commands) {
             this.commands.put(command.getName(), command);
@@ -34,5 +26,4 @@ public class ConsoleClient {
     public void printLn(String argument) {
         System.out.println(argument);
     }
-
 }

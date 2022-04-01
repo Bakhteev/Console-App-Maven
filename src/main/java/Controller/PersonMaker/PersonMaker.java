@@ -19,7 +19,7 @@ public class PersonMaker {
         while (true) {
             try {
                 System.out.println("Enter person's name");
-                name = userScanner.next();
+                name = userScanner.nextLine();
                 validator.validateName(name);
                 name = name.trim();
                 System.out.println(name);
@@ -37,7 +37,7 @@ public class PersonMaker {
         while (true) {
             try {
                 System.out.println("Enter X coordinate");
-                strX = userScanner.next().trim();
+                strX = userScanner.nextLine().trim();
                 validator.validateCoordinatesX(strX);
                 x = Integer.parseInt(strX);
                 break;
@@ -57,7 +57,7 @@ public class PersonMaker {
         while (true) {
             try {
                 System.out.println("Enter Y coordinate");
-                strY = userScanner.next().trim();
+                strY = userScanner.nextLine().trim();
                 validator.validateCoordinatesY(strY);
                 y = Integer.parseInt(strY);
                 break;
@@ -83,7 +83,7 @@ public class PersonMaker {
         while (true) {
             try {
                 System.out.println("Enter person's height");
-                strHeight = userScanner.next().trim();
+                strHeight = userScanner.nextLine().trim();
                 validator.validateHeight(strHeight);
                 height = Long.parseLong(strHeight);
                 break;
@@ -102,7 +102,7 @@ public class PersonMaker {
         while (true) {
             try {
                 System.out.println("Enter person's weight");
-                strWeight = userScanner.next().trim();
+                strWeight = userScanner.nextLine().trim();
                 validator.validateWeight(strWeight);
                 weight = Float.parseFloat(strWeight);
                 break;
@@ -122,7 +122,7 @@ public class PersonMaker {
             try {
                 System.out.println("Choose eyes' color.");
                 EyesColor.showColorsList();
-                strColor = userScanner.next().trim().toUpperCase();
+                strColor = userScanner.nextLine().trim().toUpperCase();
                 color = EyesColor.valueOf(strColor);
                 break;
             } catch (IllegalArgumentException e) {
@@ -139,7 +139,7 @@ public class PersonMaker {
             try {
                 System.out.println("Choose hairs' color.");
                 HairsColor.showColorsList();
-                strColor = userScanner.next().trim().toUpperCase();
+                strColor = userScanner.nextLine().trim().toUpperCase();
                 color = HairsColor.valueOf(strColor);
                 break;
             } catch (IllegalArgumentException e) {
@@ -155,7 +155,7 @@ public class PersonMaker {
         while (true) {
             try {
                 System.out.println("Enter Location X");
-                strX = userScanner.next().trim();
+                strX = userScanner.nextLine().trim();
                 validator.validateLocationX(strX);
                 x = Long.parseLong(strX);
                 break;
@@ -174,7 +174,7 @@ public class PersonMaker {
         while (true) {
             try {
                 System.out.println("Enter Location Y");
-                strY = userScanner.next().trim();
+                strY = userScanner.nextLine().trim();
                 if (strY.isEmpty()) {
                     return null;
                 }
@@ -195,7 +195,7 @@ public class PersonMaker {
         while (true) {
             try {
                 System.out.println("Enter Location Z");
-                strZ = userScanner.next().trim();
+                strZ = userScanner.nextLine().trim();
                 validator.validateLocationZ(strZ);
                 z = Float.parseFloat(strZ);
                 break;
@@ -213,7 +213,7 @@ public class PersonMaker {
         while (true) {
             try {
                 System.out.println("Enter Location's name");
-                name = userScanner.next().trim();
+                name = userScanner.nextLine().trim();
                 validator.validateName(name);
                 break;
             } catch (IllegalArgumentException e) {

@@ -29,7 +29,7 @@ public class Main {
                 new InfoCommand(collectionManager),
                 new ShowCommand(collectionManager.getCollection()),
                 new AddCommand(new PersonMaker(new Scanner(System.in)), collectionManager),
-                new UpdateCommand(),
+                new UpdateCommand(collectionManager),
                 new RemoveByIdCommand(collectionManager),
                 new AddIfMinCommand(collectionManager, new PersonMaker(new Scanner(System.in))),
                 new SaveCommand(fileWorker, jsonParser, collectionManager),
@@ -64,14 +64,16 @@ public class Main {
 //        consoleClient.executeCommand("show");
 
 //        System.out.println(collectionManager.getCollection().getFirst());
-        while (true) {
-            Console console = System.console();
-            if (console != null) {
-                System.out.println("Hello u pidor");
-                consoleClient.executeCommand(console.readLine("type the command"));
-            }
-        }
+//        while (true) {
+//            Console console = System.console();
+//            if (console != null) {
+//                System.out.println("Hello u pidor");
+//                consoleClient.executeCommand(console.readLine("type the command\n"));
+//            }
+//        }
 
+
+        consoleClient.executeCommand("update 770702072");
     }
 
 
