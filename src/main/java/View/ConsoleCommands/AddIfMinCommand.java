@@ -22,11 +22,21 @@ public class AddIfMinCommand extends AbstractCommand {
 
     @Override
     public boolean execute(String argument) {
-        Optional<Person> minPerson = collectionManager.getCollection().stream().min(new MinPersonComparator());
-        Person candidate = maker.startMaker();
-        if (new MinPersonComparator().compare(minPerson.get(), candidate) > 0) {
-            collectionManager.add(candidate);
+        try {
+            if (collectionManager.size() == 0) {
+                System.out.println("collection is empty");
+                return false;
+            }
+            Optional<Person> minPerson = collectionManager.getCollection().stream().min(new MinPersonComparator());
+            Person candidate = maker.startMaker();
+            if (new MinPersonComparator().compare(minPerson.get(), candidate) > 0) {
+                collectionManager.add(candidate);
+                System.out.println("Person has successfully added");
+            }
+            return true;
+        } catch (NullPointerException e) {
+            System.out.println(e.getMessage());
+            return false;
         }
-        return true;
     }
 }

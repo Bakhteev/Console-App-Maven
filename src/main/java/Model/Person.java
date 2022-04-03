@@ -1,9 +1,11 @@
 package Model;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
-public class Person implements Comparable<Person> {
+public class Person {
     private final Integer id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно
     // быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
@@ -14,11 +16,6 @@ public class Person implements Comparable<Person> {
     private final EyesColor eyesColor; //Поле не может быть null
     private HairsColor hairsColor; //Поле не может быть null
     private Location location; //Поле не может быть null
-
-    @Override
-    public int compareTo(Person person) {
-        return name.compareTo(person.getName());
-    }
 
     public Person(String name, Coordinates coordinates, Long height, float weight, EyesColor eyesColor,
                   HairsColor hairsColor, Location location) throws IllegalArgumentException {
@@ -68,10 +65,6 @@ public class Person implements Comparable<Person> {
         this.coordinates = coordinates;
     }
 
-    public void setCreationDate(LocalDateTime creationDate) {
-        this.creationDate = creationDate;
-    }
-
     public void setHeight(Long height) {
         this.height = height;
     }
@@ -94,7 +87,7 @@ public class Person implements Comparable<Person> {
                 "   id: " + id + ";\n" +
                 "   name: '" + name + '\'' + ";\n" +
                 "   coordinates: " + coordinates.toString() + ";\n" +
-                "   creationDate: " + creationDate.toString() + ";\n" +
+                "   creationDate: " + creationDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")) + ";\n" +
                 "   height: " + height + ";\n" +
                 "   weight: " + weight + ";\n" +
                 "   eyeColor: " + eyesColor.toString() + ";\n" +

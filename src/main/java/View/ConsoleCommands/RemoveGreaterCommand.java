@@ -20,6 +20,10 @@ public class RemoveGreaterCommand extends AbstractCommand {
 
     @Override
     public boolean execute(String argument) {
+        if(collectionManager.size() == 0){
+            System.out.println("collection is empty");
+            return false;
+        }
         Person personToCompare = maker.startMaker();
         ArrayList<Person> listToRemove = new ArrayList<>();
 

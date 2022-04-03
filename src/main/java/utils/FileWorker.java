@@ -1,5 +1,8 @@
 package utils;
 
+import Exeptions.FileCanNotBeWrittenException;
+import Exeptions.NoReadableFileException;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
@@ -15,7 +18,17 @@ public class FileWorker {
 
         StringBuilder jsonString = new StringBuilder();
         File file = new File(filePath);
-        try (Reader reader = new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8);
+        try {
+            if (!file.canRead()) {
+                throw new NoReadableFileException("File can't be read. Please change access rights");
+            }
+            if (!file.canWrite()) {
+                throw new FileCanNotBeWrittenException("File can't be read. Please change access rights");
+            }
+        } catch (NoReadableFileException | FileCanNotBeWrittenException e) {
+            System.out.println(e.getMessage());
+        }
+        try (Reader reader = new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8)
         ) {
             int c;
             while ((c = reader.read()) != -1) {

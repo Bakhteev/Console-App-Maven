@@ -12,7 +12,11 @@ public class ClearCommand extends AbstractCommand {
 
     @Override
     public boolean execute(String argument) {
-        collectionManager.clearCollection();
+        if (collectionManager.size() == 0) {
+            System.out.println("Collection is empty");
+            return false;
+        } else
+            collectionManager.clearCollection();
         return true;
     }
 }

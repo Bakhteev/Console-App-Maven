@@ -12,6 +12,10 @@ public class RemoveFirstCommand extends AbstractCommand {
 
     @Override
     public boolean execute(String argument) {
+        if (collectionManager.size() == 0) {
+            System.out.println("collection is empty");
+            return false;
+        }
         collectionManager.removeFirstElement();
         return true;
     }

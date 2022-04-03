@@ -19,7 +19,7 @@ public class HelpCommand extends AbstractCommand {
         } catch (IllegalArgumentException exception) {
             consoleClient.printLn("Использование: '" + getName() + "'");
         }
-        return false;
+        return true;
     }
 
 

@@ -9,6 +9,7 @@ public class ExitCommand extends AbstractCommand {
 
     @Override
     public boolean execute(String arguments) {
-        return false;
+        System.exit(0);
+        return true;
     }
 }

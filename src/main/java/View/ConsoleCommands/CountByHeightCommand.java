@@ -15,9 +15,18 @@ public class CountByHeightCommand extends AbstractCommand {
 
     @Override
     public boolean execute(String argument) {
-        long height = Long.parseLong(argument);
-        long result = collection.stream().filter((Person p) -> p.getHeight() == height).count();
-        System.out.println(result);
-        return true;
+        try{
+            if (collection.size() == 0){
+                System.out.println("collection is empty");
+                return false;
+            }
+            long height = Long.parseLong(argument);
+            long result = collection.stream().filter((Person p) -> p.getHeight() == height).count();
+            System.out.println(result);
+            return true;
+        }catch(NumberFormatException e){
+            System.out.println(argument + " is not a number");
+            return false;
+        }
     }
 }

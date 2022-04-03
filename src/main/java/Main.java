@@ -13,7 +13,7 @@ import java.util.*;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         FileWorker fileWorker = new FileWorker(System.getProperty("user.dir") + "/../" + args[0]);
         JSONParser jsonParser = new JSONParser();
 
@@ -29,7 +29,7 @@ public class Main {
                 new InfoCommand(collectionManager),
                 new ShowCommand(collectionManager.getCollection()),
                 new AddCommand(new PersonMaker(new Scanner(System.in)), collectionManager),
-                new UpdateCommand(collectionManager),
+                new UpdateCommand(collectionManager, new PersonMaker(new Scanner(System.in)), new Scanner(System.in)),
                 new RemoveByIdCommand(collectionManager),
                 new AddIfMinCommand(collectionManager, new PersonMaker(new Scanner(System.in))),
                 new SaveCommand(fileWorker, jsonParser, collectionManager),
@@ -61,7 +61,7 @@ public class Main {
 //        consoleClient.executeCommand("remove_greater");
 //        consoleClient.executeCommand("show");
 //        consoleClient.executeCommand("print_descending");
-//        consoleClient.executeCommand("show");
+        consoleClient.executeCommand("show");
 
 //        System.out.println(collectionManager.getCollection().getFirst());
 //        while (true) {
@@ -72,8 +72,21 @@ public class Main {
 //            }
 //        }
 
+//
+//        consoleClient.executeCommand("update 770702072");
 
-        consoleClient.executeCommand("update 770702072");
+
+//        for (int i = 0; i < 100; i++){
+//            System.out.println(i);
+//            for (int j = 0 ; j < 101; j++){
+//                System.out.println(j + "j");
+//                if(j == 1) {
+//                    System.out.println("break");
+//                    break;
+//                }
+//            }
+////            System.out.println("not breaked");
+//        }
     }
 
 

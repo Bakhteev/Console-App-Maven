@@ -16,6 +16,7 @@ public class AddCommand extends AbstractCommand {
     @Override
     public boolean execute(String argument) {
         collectionManager.add(maker.startMaker());
+        System.out.println("Person has successfully added");
         return true;
     }
 }

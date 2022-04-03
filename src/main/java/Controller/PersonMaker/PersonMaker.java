@@ -2,6 +2,8 @@ package Controller.PersonMaker;
 
 import Controller.validators.PersonValidator;
 import Model.*;
+import View.ConsoleCommands.UpdateCommand;
+
 import java.util.Scanner;
 
 public class PersonMaker {
@@ -22,7 +24,6 @@ public class PersonMaker {
                 name = userScanner.nextLine();
                 validator.validateName(name);
                 name = name.trim();
-                System.out.println(name);
                 break;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -52,7 +53,7 @@ public class PersonMaker {
 
 
     private int askCoordinatesY() {
-        String strY;
+        String strY = null;
         int y;
         while (true) {
             try {
@@ -62,7 +63,7 @@ public class PersonMaker {
                 y = Integer.parseInt(strY);
                 break;
             } catch (NumberFormatException e) {
-                System.out.println(e.getMessage());
+                System.out.println(strY + " not a number");
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
@@ -78,7 +79,7 @@ public class PersonMaker {
     }
 
     private Long askHeight() {
-        String strHeight;
+        String strHeight = null;
         Long height;
         while (true) {
             try {
@@ -88,7 +89,7 @@ public class PersonMaker {
                 height = Long.parseLong(strHeight);
                 break;
             } catch (NumberFormatException e) {
-                System.out.println(e.getMessage());
+                System.out.println(strHeight + " not a number");
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
@@ -97,7 +98,7 @@ public class PersonMaker {
     }
 
     private float askWeight() {
-        String strWeight;
+        String strWeight = null;
         float weight;
         while (true) {
             try {
@@ -107,7 +108,7 @@ public class PersonMaker {
                 weight = Float.parseFloat(strWeight);
                 break;
             } catch (NumberFormatException e) {
-                System.out.println(e.getMessage());
+                System.out.println(strWeight + " not a number");
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
@@ -150,7 +151,7 @@ public class PersonMaker {
     }
 
     private Long askLocationX() {
-        String strX;
+        String strX = null;
         Long x;
         while (true) {
             try {
@@ -160,7 +161,7 @@ public class PersonMaker {
                 x = Long.parseLong(strX);
                 break;
             } catch (NumberFormatException e) {
-                System.out.println(e.getMessage());
+                System.out.println(strX + " not a number");
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
@@ -169,7 +170,7 @@ public class PersonMaker {
     }
 
     private Integer askLocationY() {
-        String strY;
+        String strY = null;
         int y;
         while (true) {
             try {
@@ -181,16 +182,16 @@ public class PersonMaker {
                 y = Integer.parseInt(strY);
                 break;
             } catch (NumberFormatException e) {
-                System.out.println(e.getMessage());
+                System.out.println(strY + " not a number");
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
-        return (int) y;
+        return y;
     }
 
     private Float askLocationZ() {
-        String strZ;
+        String strZ = null;
         Float z;
         while (true) {
             try {
@@ -200,7 +201,7 @@ public class PersonMaker {
                 z = Float.parseFloat(strZ);
                 break;
             } catch (NumberFormatException e) {
-                System.out.println(e.getMessage());
+                System.out.println(strZ + " not a number");
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
@@ -240,6 +241,28 @@ public class PersonMaker {
         HairsColor hairsColor = askHairColor();
         Location location = this.location();
         return new Person(personName, coordinates, height, weight, eyesColor, hairsColor, location);
+    }
+
+    public void setPersonByFields(Person personToUpdate, String param) {
+        if (UpdateCommand.Fields.valueOf(param).equals(UpdateCommand.Fields.Name)) {
+            String name = askPersonName();
+            personToUpdate.setName(name);
+        }
+        if (UpdateCommand.Fields.valueOf(param).equals(UpdateCommand.Fields.Coordinates)) {
+            personToUpdate.setCoordinates(coordinates());
+        }
+        if (UpdateCommand.Fields.valueOf(param).equals(UpdateCommand.Fields.Height)) {
+            personToUpdate.setHeight(askHeight());
+        }
+        if (UpdateCommand.Fields.valueOf(param).equals(UpdateCommand.Fields.Weight)) {
+            personToUpdate.setWeight(askWeight());
+        }
+        if (UpdateCommand.Fields.valueOf(param).equals(UpdateCommand.Fields.HairsColor)) {
+            personToUpdate.setHairsColor(askHairColor());
+        }
+        if (UpdateCommand.Fields.valueOf(param).equals(UpdateCommand.Fields.Location)) {
+            personToUpdate.setLocation(location());
+        }
     }
 
 }
