@@ -5,6 +5,7 @@ import utils.FileWorker;
 import utils.JSONParser;
 
 import java.io.IOException;
+
 public class SaveCommand extends AbstractCommand {
     FileWorker fileWorker;
     JSONParser jsonParser;
@@ -19,10 +20,16 @@ public class SaveCommand extends AbstractCommand {
 
     @Override
     public boolean execute(String argument) {
+
+
         try {
+            if (!argument.isEmpty()) {
+                throw new IllegalArgumentException("Using of command: " + getName());
+            }
             collectionManager.setLastSaveTime();
             fileWorker.saveFile(jsonParser.toJSON(collectionManager.getCollection()));
-        } catch (IOException e) {
+            System.out.println("Collection has successfully saved");
+        } catch (IOException | IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return false;
         }

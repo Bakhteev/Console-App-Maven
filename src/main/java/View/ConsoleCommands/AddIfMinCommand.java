@@ -3,6 +3,7 @@ package View.ConsoleCommands;
 import Controller.PersonMaker.PersonMaker;
 import Controller.collectionManagers.LinkedListCollectionManager;
 import Model.*;
+import View.ConsoleClient.ConsoleClient;
 import comparators.MinPersonComparator;
 import comparators.PersonNameComparator;
 
@@ -11,17 +12,26 @@ import java.util.Optional;
 public class AddIfMinCommand extends AbstractCommand {
 
     private LinkedListCollectionManager collectionManager;
-    private PersonMaker maker;
 
-    public AddIfMinCommand(LinkedListCollectionManager collectionManager, PersonMaker maker) {
+    public AddIfMinCommand(LinkedListCollectionManager collectionManager) {
         super("add_if_min", "add a new element to the collection if its value is less than the smallest " +
                 "element in this collection.", "{element}");
         this.collectionManager = collectionManager;
-        this.maker = maker;
     }
 
     @Override
     public boolean execute(String argument) {
+        try {
+            if (!argument.isEmpty()) {
+                throw new IllegalArgumentException("Using of command: " + getName());
+
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+
+        PersonMaker maker = new PersonMaker(ConsoleClient.fileMode ? ConsoleClient.getScanners().getLast() : ConsoleClient.scanner);
         try {
             if (collectionManager.size() == 0) {
                 System.out.println("collection is empty");

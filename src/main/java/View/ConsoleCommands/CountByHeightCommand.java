@@ -1,4 +1,5 @@
 package View.ConsoleCommands;
+
 import Model.Person;
 
 import java.util.LinkedList;
@@ -15,17 +16,22 @@ public class CountByHeightCommand extends AbstractCommand {
 
     @Override
     public boolean execute(String argument) {
-        try{
-            if (collection.size() == 0){
+        try {
+            if (argument.isEmpty())
+                throw new IllegalArgumentException("Using of command: " + getName() + " " + getParameters());
+            if (collection.size() == 0) {
                 System.out.println("collection is empty");
                 return false;
             }
             long height = Long.parseLong(argument);
             long result = collection.stream().filter((Person p) -> p.getHeight() == height).count();
-            System.out.println(result);
+            System.out.println("number of elements: " + result);
             return true;
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             System.out.println(argument + " is not a number");
+            return false;
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return false;
         }
     }

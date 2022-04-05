@@ -1,4 +1,5 @@
 package View.ConsoleCommands;
+
 import Model.Person;
 
 import java.util.LinkedList;
@@ -13,7 +14,15 @@ public class ShowCommand extends AbstractCommand {
 
     @Override
     public boolean execute(String argument) {
+        try {
+            if (!argument.isEmpty()) {
+                throw new IllegalArgumentException("Using of command: " + getName());
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
         System.out.println(collection);
-        return false;
+        return true;
     }
 }

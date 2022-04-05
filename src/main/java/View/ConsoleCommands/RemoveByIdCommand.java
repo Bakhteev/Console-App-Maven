@@ -12,12 +12,17 @@ public class RemoveByIdCommand extends AbstractCommand {
 
     @Override
     public boolean execute(String argument) {
-        try{
+        try {
+            if (argument.isEmpty())
+                throw new IllegalArgumentException("Using of command :" + getName() + " " + getParameters());
             collectionManager.deleteById(Integer.parseInt(argument));
             System.out.println("Element was successfully deleted");
             return true;
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             System.out.println("Wrong id format");
+            return false;
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return false;
         }
     }

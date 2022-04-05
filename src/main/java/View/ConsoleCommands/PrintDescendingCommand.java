@@ -17,6 +17,15 @@ public class PrintDescendingCommand extends AbstractCommand {
 
     @Override
     public boolean execute(String argument) {
+        try {
+            if (!argument.isEmpty())
+                throw new IllegalArgumentException("Using of command: " + getName());
+            if (collection.isEmpty())
+                throw new IllegalArgumentException("Collection is empty");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
         collection.stream().sorted(new PersonDescendingOrderComparator()).forEachOrdered(System.out::println);
         return true;
     }

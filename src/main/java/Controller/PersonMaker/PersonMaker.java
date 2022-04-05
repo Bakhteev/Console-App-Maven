@@ -2,8 +2,10 @@ package Controller.PersonMaker;
 
 import Controller.validators.PersonValidator;
 import Model.*;
+import View.ConsoleClient.ConsoleClient;
 import View.ConsoleCommands.UpdateCommand;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 public class PersonMaker {
@@ -15,62 +17,97 @@ public class PersonMaker {
         this.userScanner = userScanner;
     }
 
+    private void printArgumentSymbol() {
+        System.out.print("> ");
+    }
+
+
+    private void detectArgument(String argument) {
+        if (!argument.startsWith(">")) {
+            ConsoleClient.printParam("Wrong argument");
+            System.exit(0);
+        }
+    }
+
+    private String convertStringAsArgument(String argument) {
+        return argument.replace("> ", "");
+    }
 
     private String askPersonName() {
+        System.out.println("Enter person's name");
         String name;
+        if (ConsoleClient.fileMode) {
+            name = userScanner.nextLine().trim();
+            detectArgument(name);
+            name = convertStringAsArgument(name);
+            validator.validateName(name);
+            ConsoleClient.printParam(name);
+            return name;
+        }
         while (true) {
             try {
-                System.out.println("Enter person's name");
-                name = userScanner.nextLine();
+                printArgumentSymbol();
+                name = userScanner.nextLine().trim();
                 validator.validateName(name);
-                name = name.trim();
-                break;
+                return name;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
+
         }
-        return name;
     }
 
     private Integer askCoordinatesX() {
-        String strX = null;
-        Integer x;
+        String strX = "";
+        System.out.println("Enter X coordinate");
+        if (ConsoleClient.fileMode) {
+            strX = userScanner.nextLine().trim();
+            detectArgument(strX);
+            strX = convertStringAsArgument(strX);
+            validator.validateCoordinatesX(strX);
+            ConsoleClient.printParam(strX);
+            return Integer.parseInt(strX);
+        }
         while (true) {
             try {
-                System.out.println("Enter X coordinate");
+                printArgumentSymbol();
                 strX = userScanner.nextLine().trim();
                 validator.validateCoordinatesX(strX);
-                x = Integer.parseInt(strX);
-                break;
+                return Integer.parseInt(strX);
             } catch (NumberFormatException e) {
                 System.out.println(strX + " not a number");
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
-        return x;
+
     }
 
-
     private int askCoordinatesY() {
-        String strY = null;
-        int y;
+        String strY = "";
+        System.out.println("Enter Y coordinate");
+        if (ConsoleClient.fileMode) {
+            strY = userScanner.nextLine().trim();
+            detectArgument(strY);
+
+            strY = convertStringAsArgument(strY);
+            validator.validateCoordinatesY(strY);
+            ConsoleClient.printParam(strY);
+            return Integer.parseInt(strY);
+        }
         while (true) {
             try {
-                System.out.println("Enter Y coordinate");
+                printArgumentSymbol();
                 strY = userScanner.nextLine().trim();
                 validator.validateCoordinatesY(strY);
-                y = Integer.parseInt(strY);
-                break;
+                return Integer.parseInt(strY);
             } catch (NumberFormatException e) {
                 System.out.println(strY + " not a number");
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
-        return y;
     }
-
 
     private Coordinates coordinates() {
         Integer x = askCoordinatesX();
@@ -79,149 +116,206 @@ public class PersonMaker {
     }
 
     private Long askHeight() {
-        String strHeight = null;
-        Long height;
+        System.out.println("Enter person's height");
+        String strHeight = "";
+        if (ConsoleClient.fileMode) {
+            strHeight = userScanner.nextLine().trim();
+            detectArgument(strHeight);
+
+            strHeight = convertStringAsArgument(strHeight);
+            validator.validateHeight(strHeight);
+            ConsoleClient.printParam(strHeight);
+            return Long.parseLong(strHeight);
+
+        }
         while (true) {
             try {
-                System.out.println("Enter person's height");
+                printArgumentSymbol();
                 strHeight = userScanner.nextLine().trim();
                 validator.validateHeight(strHeight);
-                height = Long.parseLong(strHeight);
-                break;
+                return Long.parseLong(strHeight);
             } catch (NumberFormatException e) {
                 System.out.println(strHeight + " not a number");
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
-        return height;
     }
 
     private float askWeight() {
-        String strWeight = null;
-        float weight;
+        System.out.println("Enter person's weight");
+        String strWeight = "";
+        if (ConsoleClient.fileMode) {
+            strWeight = userScanner.nextLine().trim();
+            detectArgument(strWeight);
+            strWeight = convertStringAsArgument(strWeight);
+            validator.validateWeight(strWeight);
+            ConsoleClient.printParam(strWeight);
+            return Float.parseFloat(strWeight);
+        }
         while (true) {
             try {
-                System.out.println("Enter person's weight");
+                printArgumentSymbol();
                 strWeight = userScanner.nextLine().trim();
                 validator.validateWeight(strWeight);
-                weight = Float.parseFloat(strWeight);
-                break;
+                return Float.parseFloat(strWeight);
             } catch (NumberFormatException e) {
                 System.out.println(strWeight + " not a number");
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
-        return weight;
     }
 
     private EyesColor askEyesColor() {
         String strColor;
-        EyesColor color;
+        System.out.println("Choose eyes' color.");
+        if (ConsoleClient.fileMode) {
+            strColor = userScanner.nextLine().trim().toUpperCase();
+            detectArgument(strColor);
+            strColor = convertStringAsArgument(strColor);
+            ConsoleClient.printParam(strColor);
+            return EyesColor.valueOf(strColor);
+
+        }
         while (true) {
             try {
-                System.out.println("Choose eyes' color.");
                 EyesColor.showColorsList();
+                printArgumentSymbol();
                 strColor = userScanner.nextLine().trim().toUpperCase();
-                color = EyesColor.valueOf(strColor);
-                break;
+                return EyesColor.valueOf(strColor);
             } catch (IllegalArgumentException e) {
                 System.out.println("Eyes color wasn't found.");
             }
         }
-        return color;
     }
 
     private HairsColor askHairColor() {
+        System.out.println("Choose hairs' color.");
         String strColor;
-        HairsColor color;
+        if (ConsoleClient.fileMode) {
+            strColor = userScanner.nextLine().trim().toUpperCase();
+            detectArgument(strColor);
+            strColor = convertStringAsArgument(strColor);
+            ConsoleClient.printParam(strColor);
+            return HairsColor.valueOf(strColor);
+
+        }
         while (true) {
             try {
-                System.out.println("Choose hairs' color.");
                 HairsColor.showColorsList();
+                printArgumentSymbol();
                 strColor = userScanner.nextLine().trim().toUpperCase();
-                color = HairsColor.valueOf(strColor);
-                break;
+                return HairsColor.valueOf(strColor);
             } catch (IllegalArgumentException e) {
                 System.out.println("Hairs' color wasn't found.");
             }
         }
-        return color;
     }
 
     private Long askLocationX() {
-        String strX = null;
-        Long x;
+        System.out.println("Enter Location X");
+        String strX = "";
+        if (ConsoleClient.fileMode) {
+            strX = userScanner.nextLine().trim();
+            detectArgument(strX);
+
+            strX = convertStringAsArgument(strX);
+            validator.validateLocationX(strX);
+            ConsoleClient.printParam(strX);
+            return Long.parseLong(strX);
+
+        }
         while (true) {
             try {
-                System.out.println("Enter Location X");
+                printArgumentSymbol();
                 strX = userScanner.nextLine().trim();
                 validator.validateLocationX(strX);
-                x = Long.parseLong(strX);
-                break;
+                return Long.parseLong(strX);
             } catch (NumberFormatException e) {
                 System.out.println(strX + " not a number");
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
-        return x;
     }
 
     private Integer askLocationY() {
-        String strY = null;
-        int y;
+        System.out.println("Enter Location Y");
+        String strY = "";
+        if (ConsoleClient.fileMode) {
+            strY = userScanner.nextLine().trim();
+            detectArgument(strY);
+            strY = convertStringAsArgument(strY);
+            if (strY.isEmpty()) {
+                ConsoleClient.printParam(strY);
+                return null;
+            }
+            ConsoleClient.printParam(strY);
+            return Integer.parseInt(strY);
+
+        }
         while (true) {
             try {
-                System.out.println("Enter Location Y");
+                printArgumentSymbol();
                 strY = userScanner.nextLine().trim();
                 if (strY.isEmpty()) {
                     return null;
                 }
-                y = Integer.parseInt(strY);
-                break;
+                return Integer.parseInt(strY);
             } catch (NumberFormatException e) {
                 System.out.println(strY + " not a number");
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
             }
         }
-        return y;
     }
 
     private Float askLocationZ() {
-        String strZ = null;
-        Float z;
+        System.out.println("Enter Location Z");
+        String strZ = "";
+        if (ConsoleClient.fileMode) {
+            strZ = userScanner.nextLine().trim();
+            detectArgument(strZ);
+            strZ = convertStringAsArgument(strZ);
+            validator.validateLocationZ(strZ);
+            ConsoleClient.printParam(strZ);
+            return Float.parseFloat(strZ);
+        }
         while (true) {
             try {
-                System.out.println("Enter Location Z");
+                printArgumentSymbol();
                 strZ = userScanner.nextLine().trim();
                 validator.validateLocationZ(strZ);
-                z = Float.parseFloat(strZ);
-                break;
+                return Float.parseFloat(strZ);
             } catch (NumberFormatException e) {
                 System.out.println(strZ + " not a number");
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
-        return z;
     }
 
     private String askLocationName() {
+        System.out.println("Enter Location's name");
         String name;
+        if (ConsoleClient.fileMode) {
+            name = userScanner.nextLine().trim();
+            detectArgument(name);
+            name = convertStringAsArgument(name);
+            validator.validateName(name);
+            ConsoleClient.printParam(name);
+            return name;
+
+        }
         while (true) {
+            printArgumentSymbol();
+            name = userScanner.nextLine().trim();
             try {
-                System.out.println("Enter Location's name");
-                name = userScanner.nextLine().trim();
                 validator.validateName(name);
-                break;
+                return name;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
-        return name;
     }
 
     private Location location() {
@@ -244,25 +338,33 @@ public class PersonMaker {
     }
 
     public void setPersonByFields(Person personToUpdate, String param) {
-        if (UpdateCommand.Fields.valueOf(param).equals(UpdateCommand.Fields.Name)) {
-            String name = askPersonName();
-            personToUpdate.setName(name);
-        }
-        if (UpdateCommand.Fields.valueOf(param).equals(UpdateCommand.Fields.Coordinates)) {
-            personToUpdate.setCoordinates(coordinates());
-        }
-        if (UpdateCommand.Fields.valueOf(param).equals(UpdateCommand.Fields.Height)) {
-            personToUpdate.setHeight(askHeight());
-        }
-        if (UpdateCommand.Fields.valueOf(param).equals(UpdateCommand.Fields.Weight)) {
-            personToUpdate.setWeight(askWeight());
-        }
-        if (UpdateCommand.Fields.valueOf(param).equals(UpdateCommand.Fields.HairsColor)) {
-            personToUpdate.setHairsColor(askHairColor());
-        }
-        if (UpdateCommand.Fields.valueOf(param).equals(UpdateCommand.Fields.Location)) {
-            personToUpdate.setLocation(location());
+
+        try {
+            if (UpdateCommand.Fields.valueOf(param.toUpperCase(Locale.ROOT)).equals(UpdateCommand.Fields.NAME)) {
+                String name = askPersonName();
+                personToUpdate.setName(name);
+            }
+            if (UpdateCommand.Fields.valueOf(param.toUpperCase(Locale.ROOT)).equals(UpdateCommand.Fields.COORDINATES)) {
+                personToUpdate.setCoordinates(coordinates());
+            }
+            if (UpdateCommand.Fields.valueOf(param.toUpperCase(Locale.ROOT)).equals(UpdateCommand.Fields.HEIGHT)) {
+                personToUpdate.setHeight(askHeight());
+            }
+            if (UpdateCommand.Fields.valueOf(param.toUpperCase(Locale.ROOT)).equals(UpdateCommand.Fields.WEIGHT)) {
+                personToUpdate.setWeight(askWeight());
+            }
+            if (UpdateCommand.Fields.valueOf(param.toUpperCase(Locale.ROOT)).equals(UpdateCommand.Fields.HAIRSCOLOR)) {
+                personToUpdate.setHairsColor(askHairColor());
+            }
+            if (UpdateCommand.Fields.valueOf(param.toUpperCase(Locale.ROOT)).equals(UpdateCommand.Fields.LOCATION)) {
+                personToUpdate.setLocation(location());
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println("Wrong field, please try one more time");
         }
     }
 
+
 }
+
+

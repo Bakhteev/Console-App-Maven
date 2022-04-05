@@ -17,8 +17,14 @@ public class PrintUniqueLocationCommand extends AbstractCommand {
 
     @Override
     public boolean execute(String argument) {
-        if(collection.size() == 0){
-            System.out.println("collection is empty");
+        try{
+            if (collection.size() == 0) {
+                throw new IllegalStateException("Collection is empty");
+            }
+            if (!argument.isEmpty())
+                throw new IllegalArgumentException("Using of command: " + getName());
+        }catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
             return false;
         }
         HashMap<String, Integer> map =countLocations();

@@ -3,27 +3,35 @@ package View.ConsoleCommands;
 import Controller.PersonMaker.PersonMaker;
 import Controller.collectionManagers.LinkedListCollectionManager;
 import Model.*;
+import View.ConsoleClient.ConsoleClient;
 
 import java.util.ArrayList;
 
 public class RemoveGreaterCommand extends AbstractCommand {
-    private PersonMaker maker;
+
     private LinkedListCollectionManager collectionManager;
 
-    public RemoveGreaterCommand(PersonMaker maker, LinkedListCollectionManager collectionManager) {
+    public RemoveGreaterCommand(LinkedListCollectionManager collectionManager) {
         super("remove_greater", "remove from the collection all elements greater than the given.",
                 "{element}");
 
-        this.maker = maker;
         this.collectionManager = collectionManager;
     }
 
     @Override
     public boolean execute(String argument) {
-        if(collectionManager.size() == 0){
-            System.out.println("collection is empty");
+        try {
+            if (collectionManager.size() == 0) {
+                throw new IllegalArgumentException("Collection is empty");
+            }
+            if (!argument.isEmpty()) {
+                throw new IllegalArgumentException("Using of command: " + getName());
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return false;
         }
+        PersonMaker maker = new PersonMaker(ConsoleClient.fileMode ? ConsoleClient.getScanners().getLast() : ConsoleClient.scanner);
         Person personToCompare = maker.startMaker();
         ArrayList<Person> listToRemove = new ArrayList<>();
 

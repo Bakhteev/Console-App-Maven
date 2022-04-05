@@ -19,14 +19,21 @@ public class FileWorker {
         StringBuilder jsonString = new StringBuilder();
         File file = new File(filePath);
         try {
+            if (!file.exists()) {
+                if (file.createNewFile()) {
+                    System.out.println("File wasn't found. Program automatically created new file");
+                }
+                saveFile("[]");
+            }
             if (!file.canRead()) {
                 throw new NoReadableFileException("File can't be read. Please change access rights");
             }
             if (!file.canWrite()) {
                 throw new FileCanNotBeWrittenException("File can't be read. Please change access rights");
             }
-        } catch (NoReadableFileException | FileCanNotBeWrittenException e) {
+        } catch (NoReadableFileException | FileCanNotBeWrittenException | IOException e) {
             System.out.println(e.getMessage());
+            System.exit(0);
         }
         try (Reader reader = new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8)
         ) {

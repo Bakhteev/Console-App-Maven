@@ -1,7 +1,10 @@
 package Controller.collectionManagers;
+
 import comparators.PersonNameComparator;
 import Model.Person;
+
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 
@@ -34,7 +37,8 @@ public class LinkedListCollectionManager {
                 try {
                     int counter = 0;
                     for (Person element : this.collection) {
-                        if (id.equals(element.getId())) counter++;
+                        if (id.equals(element.getId()))
+                            counter++;
                     }
                     if (counter > 1) {
                         throw new SecurityException("Person id must be unique, objects with this id - " + id + " will be removed.\nNumber of " +
@@ -61,7 +65,7 @@ public class LinkedListCollectionManager {
     }
 
     public void loadCollection(Person[] collection) {
-        addAll(List.of(collection));
+        addAll(Arrays.asList(collection));
         initializationTime = LocalDateTime.now();
     }
 
@@ -73,12 +77,12 @@ public class LinkedListCollectionManager {
         return collection;
     }
 
-    public LocalDateTime getInitializationTime() {
-        return initializationTime;
+    public String getInitializationTime() {
+        return initializationTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
     }
 
-    public LocalDateTime getLastSaveTime() {
-        return lastSaveTime;
+    public String getLastSaveTime() {
+        return lastSaveTime == null ? null : lastSaveTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
     }
 
     public Person getElementById(Integer id) {
@@ -116,7 +120,7 @@ public class LinkedListCollectionManager {
         collection.sort(new PersonNameComparator());
     }
 
-    public void deleteObject(Person person){
+    public void deleteObject(Person person) {
         collection.remove(person);
         collection.sort(new PersonNameComparator());
     }

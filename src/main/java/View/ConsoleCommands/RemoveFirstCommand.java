@@ -1,6 +1,7 @@
 package View.ConsoleCommands;
 
 import Controller.collectionManagers.LinkedListCollectionManager;
+import View.ConsoleClient.ConsoleClient;
 
 public class RemoveFirstCommand extends AbstractCommand {
     LinkedListCollectionManager collectionManager;
@@ -12,11 +13,19 @@ public class RemoveFirstCommand extends AbstractCommand {
 
     @Override
     public boolean execute(String argument) {
-        if (collectionManager.size() == 0) {
-            System.out.println("collection is empty");
+        try {
+            if (collectionManager.size() == 0) {
+                throw new IllegalArgumentException("Collection is empty");
+            }
+            if (!argument.isEmpty()) {
+                throw new IllegalArgumentException("Using of command: " + getName());
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return false;
         }
         collectionManager.removeFirstElement();
+        ConsoleClient.printLn("First element was successfully deleted");
         return true;
     }
 }

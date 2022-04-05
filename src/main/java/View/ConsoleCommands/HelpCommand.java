@@ -13,11 +13,13 @@ public class HelpCommand extends AbstractCommand {
     @Override
     public boolean execute(String argument) {
         try {
-            consoleClient.getCommands().forEach((key, value) -> consoleClient.printLn(key + ": " + value.getDescription() + " " +
+            if (!argument.isEmpty())
+                throw new IllegalArgumentException("Using of command: " + getName());
+            consoleClient.getCommands().forEach((key, value) -> System.out.println(key + ": " + value.getDescription() + " " +
                     "Params: " + (value.getParameters().isEmpty() ? "none" : value.getParameters())));
             return true;
         } catch (IllegalArgumentException exception) {
-            consoleClient.printLn("Использование: '" + getName() + "'");
+            System.out.println("Использование: '" + getName() + "'");
         }
         return true;
     }

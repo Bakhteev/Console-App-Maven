@@ -5,6 +5,7 @@ import Controller.collectionManagers.LinkedListCollectionManager;
 import Exeptions.PersonNotFoundException;
 import Model.HairsColor;
 import Model.Person;
+import View.ConsoleClient.ConsoleClient;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -15,30 +16,26 @@ import java.util.Scanner;
 
 public class UpdateCommand extends AbstractCommand {
     private LinkedListCollectionManager collectionManager;
-    private PersonMaker maker;
-    private Scanner scanner;
 
     public enum Fields {
-        Name,
-        Coordinates,
-        Height,
-        Weight,
-        HairsColor,
-        Location;
+        NAME,
+        COORDINATES,
+        HEIGHT,
+        WEIGHT,
+        HAIRSCOLOR,
+        LOCATION;
 
         static public void showFieldList() {
             for (int i = 0; i < values().length - 1; i++) {
-                System.out.println(values()[i]);
+                System.out.println(values()[i].toString().toLowerCase(Locale.ROOT));
             }
         }
     }
 
-    public UpdateCommand(LinkedListCollectionManager collectionManager, PersonMaker maker, Scanner scanner) {
+    public UpdateCommand(LinkedListCollectionManager collectionManager) {
         super("update", "update the value of the collection element whose id is equal to the given one.",
                 "id {element}");
         this.collectionManager = collectionManager;
-        this.maker = maker;
-        this.scanner = scanner;
     }
 
     @Override
@@ -72,14 +69,25 @@ public class UpdateCommand extends AbstractCommand {
 //        System.out.println(personToUpdate.toString());
 
         try {
+            if (argument.isEmpty())
+                throw new IllegalArgumentException("Using of command :" + getName() + " " + getParameters());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+        PersonMaker maker = new PersonMaker(ConsoleClient.fileMode ? ConsoleClient.getScanners().getLast() : ConsoleClient.scanner);
+        try {
             Person personToUpdate = collectionManager.getElementById(Integer.parseInt(argument));
             if (personToUpdate == null) {
                 throw new PersonNotFoundException("Person with id: " + argument + "wasn't found");
             }
-            Fields.showFieldList();
-            System.out.println("Choose param's names: ");
-            String[] params = scanner.nextLine().split(",");
-            Arrays.stream(params).forEach(param -> maker.setPersonByFields(personToUpdate, param.trim()));
+            if (!ConsoleClient.fileMode) {
+                Fields.showFieldList();
+                System.out.println("Choose param's names: ");
+                System.out.print("> ");
+            }
+            String[] params = ConsoleClient.scanner.nextLine().split(",");
+            Arrays.stream(params).forEach(param -> maker.setPersonByFields(personToUpdate, param.replace(">", "").trim()));
             System.out.println(personToUpdate);
             return true;
         } catch (NumberFormatException e) {
