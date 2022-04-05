@@ -6,6 +6,8 @@ import View.ConsoleCommands.*;
 import utils.FileWorker;
 import utils.JSONParser;
 
+import java.io.Console;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -34,6 +36,12 @@ public class Main {
                 new RemoveFirstCommand(collectionManager),
         });
         consoleClient.startInteractiveMode();
+
+//        Console console = System.console();
+//        while(true){
+//            String line = console.readLine("type smt\n");
+//            System.out.println(line);
+//        }
     }
 
 

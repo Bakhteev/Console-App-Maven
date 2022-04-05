@@ -16,6 +16,7 @@ import java.util.Scanner;
 
 public class UpdateCommand extends AbstractCommand {
     private LinkedListCollectionManager collectionManager;
+    private PersonMaker maker;
 
     public enum Fields {
         NAME,
@@ -75,7 +76,10 @@ public class UpdateCommand extends AbstractCommand {
             System.out.println(e.getMessage());
             return false;
         }
-        PersonMaker maker = new PersonMaker(ConsoleClient.fileMode ? ConsoleClient.getScanners().getLast() : ConsoleClient.scanner);
+        if (ConsoleClient.fileMode) {
+            maker = new PersonMaker(ConsoleClient.getScanners().getLast());
+        } else
+            maker = new PersonMaker(ConsoleClient.scanner);
         try {
             Person personToUpdate = collectionManager.getElementById(Integer.parseInt(argument));
             if (personToUpdate == null) {
@@ -86,7 +90,7 @@ public class UpdateCommand extends AbstractCommand {
                 System.out.println("Choose param's names: ");
                 System.out.print("> ");
             }
-            String[] params = ConsoleClient.scanner.nextLine().split(",");
+            String[] params = ConsoleClient.scanner.readLine().split(",");
             Arrays.stream(params).forEach(param -> maker.setPersonByFields(personToUpdate, param.replace(">", "").trim()));
             System.out.println(personToUpdate);
             return true;

@@ -1,6 +1,7 @@
 package View.ConsoleCommands;
 
 import Model.Person;
+import utils.PersonFormatter;
 
 import java.util.LinkedList;
 
@@ -22,7 +23,11 @@ public class ShowCommand extends AbstractCommand {
             System.out.println(e.getMessage());
             return false;
         }
-        System.out.println(collection);
+        if (collection.size() == 0) {
+            System.out.println("Collection is empty");
+            return true;
+        }
+        System.out.println(PersonFormatter.formatCollection(collection));
         return true;
     }
 }

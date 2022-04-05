@@ -26,6 +26,9 @@ public class ExecuteScriptCommand extends AbstractCommand {
             if (consoleClient.getFiles().contains(file.getAbsolutePath()))
                 throw new ScriptLoopingException("Scripts can't be recursive!!!");
             else {
+                if (!file.exists()){
+                    throw new FileNotFoundException("File not found.");
+                }
                 if (!file.canRead()) {
                     throw new NoReadableFileException("File can't be read. Please change access rights");
                 }

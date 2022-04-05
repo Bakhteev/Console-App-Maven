@@ -6,6 +6,7 @@ import View.ConsoleClient.ConsoleClient;
 
 public class AddCommand extends AbstractCommand {
     LinkedListCollectionManager collectionManager;
+    PersonMaker maker;
 
     public AddCommand(LinkedListCollectionManager collectionManager) {
         super("add", "add a new element to the collection.", "{element}");
@@ -22,7 +23,10 @@ public class AddCommand extends AbstractCommand {
             System.out.println(e.getMessage());
             return false;
         }
-        PersonMaker maker = new PersonMaker(ConsoleClient.fileMode ? ConsoleClient.getScanners().getLast() : ConsoleClient.scanner);
+        if (ConsoleClient.fileMode)
+            maker = new PersonMaker(ConsoleClient.getScanners().getLast());
+        else
+            maker = new PersonMaker(ConsoleClient.scanner);
         collectionManager.add(maker.startMaker());
         System.out.println("Person has successfully added");
         return true;

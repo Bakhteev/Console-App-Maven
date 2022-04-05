@@ -17,6 +17,18 @@ public class Location {
         return name;
     }
 
+    public Long getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public Float getZ() {
+        return z;
+    }
+
     @Override
     public String toString() {
         return "{" + " x: " + x + ";" + " y: " + y + ";" + " z: " + z + ";" + " name: '" + name + "'; " + '}';

@@ -53,6 +53,18 @@ public class Person {
 
     public HairsColor getColor() {return this.hairsColor;}
 
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public EyesColor getEyesColor() {
+        return eyesColor;
+    }
+
+    public HairsColor getHairsColor() {
+        return hairsColor;
+    }
+
     public Coordinates getCoordinates() {
         return coordinates;
     }

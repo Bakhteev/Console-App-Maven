@@ -12,6 +12,7 @@ import java.util.Optional;
 public class AddIfMinCommand extends AbstractCommand {
 
     private LinkedListCollectionManager collectionManager;
+    private PersonMaker maker;
 
     public AddIfMinCommand(LinkedListCollectionManager collectionManager) {
         super("add_if_min", "add a new element to the collection if its value is less than the smallest " +
@@ -30,8 +31,8 @@ public class AddIfMinCommand extends AbstractCommand {
             System.out.println(e.getMessage());
             return false;
         }
-
-        PersonMaker maker = new PersonMaker(ConsoleClient.fileMode ? ConsoleClient.getScanners().getLast() : ConsoleClient.scanner);
+        if(ConsoleClient.fileMode) maker = new PersonMaker(ConsoleClient.getScanners().getLast());
+        else maker = new PersonMaker(ConsoleClient.scanner);
         try {
             if (collectionManager.size() == 0) {
                 System.out.println("collection is empty");

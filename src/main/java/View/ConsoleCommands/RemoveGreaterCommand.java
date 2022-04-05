@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class RemoveGreaterCommand extends AbstractCommand {
 
     private LinkedListCollectionManager collectionManager;
+    private PersonMaker personMaker;
 
     public RemoveGreaterCommand(LinkedListCollectionManager collectionManager) {
         super("remove_greater", "remove from the collection all elements greater than the given.",
@@ -31,8 +32,10 @@ public class RemoveGreaterCommand extends AbstractCommand {
             System.out.println(e.getMessage());
             return false;
         }
-        PersonMaker maker = new PersonMaker(ConsoleClient.fileMode ? ConsoleClient.getScanners().getLast() : ConsoleClient.scanner);
-        Person personToCompare = maker.startMaker();
+//        PersonMaker maker = new PersonMaker(ConsoleClient.fileMode ? ConsoleClient.getScanners().getLast() : ConsoleClient.scanner);
+        if(ConsoleClient.fileMode) personMaker = new PersonMaker(ConsoleClient.getScanners().getLast());
+        else personMaker = new PersonMaker(ConsoleClient.scanner);
+        Person personToCompare = personMaker.startMaker();
         ArrayList<Person> listToRemove = new ArrayList<>();
 
         collectionManager.getCollection().stream()

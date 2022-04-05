@@ -1,5 +1,8 @@
 package Controller.validators;
 
+import Model.Person;
+import View.ConsoleCommands.InfoCommand;
+
 public class PersonValidator {
     private final int MIN_VALUE = 0;
 
@@ -48,4 +51,46 @@ public class PersonValidator {
             throw new IllegalArgumentException("Location Z can't be empty");
     }
 
+    public static void checkFields(Person person) {
+        StringBuilder sb = new StringBuilder();
+        if (person.getId() <= 0) {
+            sb.append("ID can't be less then 0").append("\n");
+        }
+        if (person.getId() == null)
+            sb.append("ID can't be null").append("\n");
+        if (person.getName() == null) {
+            sb.append("name can't be null").append("\n");
+        } else {
+            if (person.getName().isEmpty()) {
+                sb.append("name can't be empty");
+            }
+        }
+        if (person.getCoordinates() == null) {
+            sb.append("Coordinates can't be null").append("\n");
+        } else {
+            if (person.getCoordinates().getX() == null) {
+                sb.append("Coordinates X can't be null ").append("\n");
+            }
+            if (person.getCoordinates().getY() > 988) {
+                sb.append("Coordinates Y can't be bigger then 988").append("\n");
+            }
+        }
+        if (person.getHairsColor() == null) {
+            sb.append("Hairs' color can't  be null").append("\n");
+        }
+        if (person.getLocation() == null) {
+            sb.append("location can't be null").append("\n");
+        } else {
+            if (person.getLocation().getX() == null) {
+                sb.append("Location X can't be null").append("\n");
+            }
+            if (person.getLocation().getName() == null) {
+                sb.append("Location name can't be null").append("\n");
+            }
+        }
+        if (!(sb.length() == 0)) {
+            sb.insert(0, "Во входном файле есть некорректные данные. В следующий раз исправьте все виды ошибок: \n");
+            throw new IllegalArgumentException(sb.toString());
+        }
+    }
 }

@@ -3,6 +3,7 @@ package View.ConsoleCommands;
 import Controller.collectionManagers.LinkedListCollectionManager;
 import Model.Person;
 import comparators.PersonDescendingOrderComparator;
+import utils.PersonFormatter;
 
 import java.util.LinkedList;
 
@@ -26,7 +27,9 @@ public class PrintDescendingCommand extends AbstractCommand {
             System.out.println(e.getMessage());
             return false;
         }
-        collection.stream().sorted(new PersonDescendingOrderComparator()).forEachOrdered(System.out::println);
+        collection.stream().sorted(new PersonDescendingOrderComparator()).forEachOrdered(person -> {
+            System.out.println(PersonFormatter.format(person));
+        });
         return true;
     }
 }

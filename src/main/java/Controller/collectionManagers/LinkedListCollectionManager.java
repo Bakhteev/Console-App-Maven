@@ -1,5 +1,6 @@
 package Controller.collectionManagers;
 
+import Controller.validators.PersonValidator;
 import comparators.PersonNameComparator;
 import Model.Person;
 
@@ -65,7 +66,14 @@ public class LinkedListCollectionManager {
     }
 
     public void loadCollection(Person[] collection) {
-        addAll(Arrays.asList(collection));
+        try {
+            for (Person person : collection) {
+                PersonValidator.checkFields(person);
+            }
+            addAll(Arrays.asList(collection));
+        }catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
         initializationTime = LocalDateTime.now();
     }
 

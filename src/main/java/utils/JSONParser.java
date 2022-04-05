@@ -1,5 +1,4 @@
 package utils;
-import Controller.collectionManagers.LinkedListCollectionManager;
 import com.fatboyindustrial.gsonjavatime.Converters;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -21,10 +20,5 @@ public class JSONParser {
     public String toJSON(Collection<?> collection) {
         Gson gson = Converters.registerLocalDateTime(new GsonBuilder().setPrettyPrinting()).create();
         return gson.toJson(collection);
-    }
-
-    public String toJSON(LinkedListCollectionManager manager) {
-        Gson gson = Converters.registerLocalDateTime(new GsonBuilder().setPrettyPrinting()).create();
-        return gson.toJson(manager);
     }
 }
