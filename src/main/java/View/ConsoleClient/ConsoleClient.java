@@ -42,9 +42,13 @@ public class ConsoleClient {
 
     public void startInteractiveMode() {
         while (true) {
-            Console console = System.console();
-            String command = console.readLine("\nEnter the command\n$ ").trim();
-            executeCommand(command);
+            try {
+                Console console = System.console();
+                String command = console.readLine("\nEnter the command\n$ ").trim();
+                executeCommand(command);
+            } catch (NullPointerException e) {
+                startInteractiveMode();
+            }
         }
     }
 
